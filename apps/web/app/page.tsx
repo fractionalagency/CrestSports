@@ -5,7 +5,7 @@ export default function Home() {
       <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-20 md:py-32">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl md:text-6xl lg:text-8xl font-black text-gray-900 mb-6 leading-tight" style={{ fontFamily: 'Montserrat', fontWeight: 900, textTransform: 'uppercase' }}>
               FIND CLOTHES THAT MATCHES YOUR STYLE
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">

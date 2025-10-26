@@ -20,7 +20,7 @@ export default function Header() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <h1 className="text-2xl font-bold text-black">SHOP.CO</h1>
+              <h1 className="text-2xl font-black text-black tracking-tight" style={{ fontFamily: 'Montserrat', fontWeight: 800, textTransform: 'uppercase' }}>SHOP.CO</h1>
             </div>
 
             {/* Desktop Navigation */}
