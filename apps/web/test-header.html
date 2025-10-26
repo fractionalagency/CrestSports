@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header Component -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 className="text-2xl font-bold text-black">SHOP.CO</h1>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <div class="relative group">
+                        <button class="flex items-center space-x-1 text-gray-900 hover:text-gray-600 transition-colors">
+                            <span>Shop</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+                    <a href="#" class="text-gray-900 hover:text-gray-600 transition-colors">On Sale</a>
+                    <a href="#" class="text-gray-900 hover:text-gray-600 transition-colors">New Arrivals</a>
+                    <a href="#" class="text-gray-900 hover:text-gray-600 transition-colors">Brands</a>
+                </nav>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-md mx-8">
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-lucide="search" class="h-5 w-5 text-gray-400"></i>
+                        </div>
+                        <input
+                            type="text"
+                            class="block w-full pl-10 pr-3 py-2.5 bg-gray-100 border border-transparent rounded-full text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                            placeholder="Search for products..."
+                        />
+                    </div>
+                </div>
+
+                <!-- Cart Icon -->
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-2 text-gray-900 hover:text-gray-600 transition-colors">
+                        <i data-lucide="shopping-cart" class="h-6 w-6"></i>
+                        <span class="absolute -top-1 -right-1 h-4 w-4 bg-black text-white text-xs rounded-full flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Test Content -->
+    <main class="p-8">
+        <h1 class="text-3xl font-bold mb-4">Sticky Header Test</h1>
+        <p class="mb-8">Scroll down to see the header stick to the top of the page.</p>
+        
+        <div class="space-y-4">
+            <div class="h-96 bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Section 1</h2>
+                <p class="text-gray-600">Content for section 1. Keep scrolling to see the sticky header in action.</p>
+            </div>
+            <div class="h-96 bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Section 2</h2>
+                <p class="text-gray-600">Content for section 2. The header should remain visible at the top.</p>
+            </div>
+            <div class="h-96 bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Section 3</h2>
+                <p class="text-gray-600">Content for section 3. Notice how the header stays fixed while scrolling.</p>
+            </div>
+            <div class="h-96 bg-white rounded-lg shadow p-6">
+                <h2 class="text-xl font-semibold mb-4">Section 4</h2>
+                <p class="text-gray-600">Content for section 4. The header is always accessible.</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
