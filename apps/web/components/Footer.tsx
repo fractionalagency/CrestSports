@@ -5,18 +5,18 @@ export default function Footer() {
     <div className="w-full relative">
       {/* Newsletter CTA Section - Overlapping section */}
       <div className="w-full flex justify-center px-4 relative z-20 -mb-20">
-        <div className="w-[80%] max-w-[1240px]">
-          <div className="bg-black text-white rounded-[20px] p-[40px] shadow-xl">
+        <div className="w-full max-w-[1240px]">
+          <div className="bg-black text-white rounded-[20px] p-[24px] sm:p-[40px] shadow-xl">
           <div className="flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-8">
             {/* Left - Heading */}
-            <div className="flex-1">
+            <div className="flex-1 text-center lg:text-left">
               <h2 
-                className="text-[32px] lg:text-[36px] font-bold leading-[1.125em]"
+                className="text-[20px] sm:text-[28px] lg:text-[36px] font-bold leading-[1.125em]"
                 style={{ 
                   fontFamily: 'Integral CF', 
                   fontWeight: 700,
                   color: '#FFFFFF',
-                  textAlign: 'left',
+                  textAlign: 'center',
                   verticalAlign: 'top'
                 }}
               >
@@ -25,18 +25,18 @@ export default function Footer() {
             </div>
 
             {/* Right - Email Form */}
-            <div className="flex flex-col gap-[12px] lg:w-[320px]">
+            <div className="flex flex-col gap-[12px] w-full lg:w-[320px]">
               {/* Email Input */}
               <div className="flex items-center gap-[10px] bg-white rounded-[62px] p-[10px_14px] w-full">
                 <img 
                   src="/search-icon.svg" 
                   alt="Search" 
-                  className="w-[20px] h-[20px]"
+                  className="w-[20px] h-[20px] flex-shrink-0"
                 />
                 <input 
                   type="email" 
                   placeholder="Enter your email address"
-                  className="flex-1 outline-none bg-transparent text-[rgba(0,0,0,0.4)] placeholder-[rgba(0,0,0,0.4)]"
+                  className="flex-1 outline-none bg-transparent text-[rgba(0,0,0,0.4)] placeholder-[rgba(0,0,0,0.4)] text-sm"
                   style={{ 
                     fontFamily: 'Satoshi', 
                     fontWeight: 400,
@@ -48,7 +48,7 @@ export default function Footer() {
               
               {/* Subscribe Button */}
               <button 
-                className="flex items-center justify-center gap-[10px] bg-white text-black rounded-[62px] p-[10px_14px] w-full hover:bg-gray-100 transition-colors"
+                className="flex items-center justify-center gap-[10px] bg-white text-black rounded-[62px] p-[10px_14px] w-full hover:bg-gray-100 transition-colors text-sm"
                 style={{ 
                   fontFamily: 'Satoshi',
                   fontWeight: 500,
@@ -66,10 +66,10 @@ export default function Footer() {
 
       {/* Main Footer Content - Full width but content centered */}
       <div className="w-full bg-[#F0F0F0] flex justify-center px-4 pt-16">
-        <div className="w-[80%] max-w-[1240px]">
-          <div className="rounded-[20px] p-[64px_101px]">
+        <div className="w-full max-w-[1240px]">
+          <div className="p-[24px] sm:p-[40px]">
           {/* Top Section - Links */}
-          <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-16 mb-12">
+          <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-16 mb-8">
             {/* Left Column - Brand Info */}
             <div className="flex flex-col gap-[35px]">
               <div className="flex flex-col gap-[25px]">
@@ -109,15 +109,15 @@ export default function Footer() {
             </div>
 
             {/* Right Columns - Links */}
-            <div className="flex gap-8 lg:gap-12">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-12 w-full">
               {/* Company Column */}
-              <div className="flex flex-col gap-[26px]">
+              <div className="flex flex-col gap-[16px]">
                 <h4 
-                  className="font-medium tracking-wider uppercase"
+                  className="font-medium tracking-wider uppercase text-sm"
                   style={{ 
                     fontFamily: 'Satoshi',
                     fontWeight: 500,
-                    fontSize: '16px',
+                    fontSize: '14px',
                     lineHeight: '1.125em',
                     letterSpacing: '18.75%',
                     textTransform: 'uppercase',
@@ -128,16 +128,16 @@ export default function Footer() {
                 >
                   Company
                 </h4>
-                <ul className="flex flex-col gap-0">
+                <ul className="flex flex-col gap-1">
                   {['About', 'Features', 'Works', 'Career'].map((item) => (
                     <li key={item}>
                       <a 
                         href="#" 
-                        className="block py-1"
+                        className="block py-1 text-sm"
                         style={{ 
                           fontFamily: 'Satoshi',
                           fontWeight: 400,
-                          fontSize: '16px',
+                          fontSize: '14px',
                           lineHeight: '1.1875em',
                           color: 'rgba(0, 0, 0, 0.6)',
                           textAlign: 'left',
@@ -152,13 +152,13 @@ export default function Footer() {
               </div>
 
               {/* Help Column */}
-              <div className="flex flex-col gap-[26px]">
+              <div className="flex flex-col gap-[16px]">
                 <h4 
-                  className="font-medium tracking-wider uppercase"
+                  className="font-medium tracking-wider uppercase text-sm"
                   style={{ 
                     fontFamily: 'Satoshi',
                     fontWeight: 500,
-                    fontSize: '16px',
+                    fontSize: '14px',
                     lineHeight: '1.125em',
                     letterSpacing: '18.75%',
                     textTransform: 'uppercase',
@@ -169,16 +169,16 @@ export default function Footer() {
                 >
                   Help
                 </h4>
-                <ul className="flex flex-col gap-0">
+                <ul className="flex flex-col gap-1">
                   {['Customer Support', 'Delivery Details', 'Terms & Conditions', 'Privacy Policy'].map((item) => (
                     <li key={item}>
                       <a 
                         href="#" 
-                        className="block py-1"
+                        className="block py-1 text-sm"
                         style={{ 
                           fontFamily: 'Satoshi',
                           fontWeight: 400,
-                          fontSize: '16px',
+                          fontSize: '14px',
                           lineHeight: '1.1875em',
                           color: 'rgba(0, 0, 0, 0.6)',
                           textAlign: 'left',
@@ -193,13 +193,13 @@ export default function Footer() {
               </div>
 
               {/* FAQ Column */}
-              <div className="flex flex-col gap-[26px]">
+              <div className="flex flex-col gap-[16px]">
                 <h4 
-                  className="font-medium tracking-wider uppercase"
+                  className="font-medium tracking-wider uppercase text-sm"
                   style={{ 
                     fontFamily: 'Satoshi',
                     fontWeight: 500,
-                    fontSize: '16px',
+                    fontSize: '14px',
                     lineHeight: '1.125em',
                     letterSpacing: '18.75%',
                     textTransform: 'uppercase',
@@ -210,16 +210,16 @@ export default function Footer() {
                 >
                   FAQ
                 </h4>
-                <ul className="flex flex-col gap-0 w-[149px]">
+                <ul className="flex flex-col gap-1">
                   {['Account', 'Manage Deliveries', 'Orders', 'Payments'].map((item) => (
                     <li key={item}>
                       <a 
                         href="#" 
-                        className="block py-1"
+                        className="block py-1 text-sm"
                         style={{ 
                           fontFamily: 'Satoshi',
                           fontWeight: 400,
-                          fontSize: '16px',
+                          fontSize: '14px',
                           lineHeight: '1.1875em',
                           color: 'rgba(0, 0, 0, 0.6)',
                           textAlign: 'left',
@@ -234,13 +234,13 @@ export default function Footer() {
               </div>
 
               {/* Resources Column */}
-              <div className="flex flex-col gap-[26px]">
+              <div className="flex flex-col gap-[16px]">
                 <h4 
-                  className="font-medium tracking-wider uppercase"
+                  className="font-medium tracking-wider uppercase text-sm"
                   style={{ 
                     fontFamily: 'Satoshi',
                     fontWeight: 500,
-                    fontSize: '16px',
+                    fontSize: '14px',
                     lineHeight: '1.125em',
                     letterSpacing: '18.75%',
                     textTransform: 'uppercase',
@@ -251,16 +251,16 @@ export default function Footer() {
                 >
                   Resources
                 </h4>
-                <ul className="flex flex-col gap-0">
+                <ul className="flex flex-col gap-1">
                   {['Free eBooks', 'Development Tutorial', 'How to - Blog', 'Youtube Playlist'].map((item) => (
                     <li key={item}>
                       <a 
                         href="#" 
-                        className="block py-1"
+                        className="block py-1 text-sm"
                         style={{ 
                           fontFamily: 'Satoshi',
                           fontWeight: 400,
-                          fontSize: '16px',
+                          fontSize: '14px',
                           lineHeight: '1.1875em',
                           color: 'rgba(0, 0, 0, 0.6)',
                           textAlign: 'left',
@@ -280,9 +280,9 @@ export default function Footer() {
           <div className="w-full h-[1px] bg-[rgba(0,0,0,0.1)] mb-6"></div>
 
           {/* Bottom Section - Payment and Copyright */}
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             {/* Payment Methods */}
-            <div className="flex items-end gap-[12px]">
+            <div className="flex items-center gap-[12px]">
               <img 
                 src="/payment-methods.svg" 
                 alt="Payment methods" 
@@ -292,14 +292,14 @@ export default function Footer() {
 
             {/* Copyright */}
             <p 
-              className="w-[269px] h-[19px]"
+              className="text-sm text-center sm:text-right"
               style={{ 
                 fontFamily: 'Satoshi',
                 fontWeight: 400,
-                fontSize: '14px',
+                fontSize: '12px',
                 lineHeight: '1.35em',
                 color: 'rgba(0, 0, 0, 0.6)',
-                textAlign: 'right',
+                textAlign: 'center',
                 verticalAlign: 'top'
               }}
             >
