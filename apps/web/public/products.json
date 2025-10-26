@@ -1,0 +1,70 @@
+{
+  "newArrivals": [
+    {
+      "id": "1",
+      "name": "T-SHIRT WITH TAPE DETAILS",
+      "price": 120,
+      "rating": 4.5,
+      "imageUrl": "https://picsum.photos/seed/tshirt1/295/298.jpg"
+    },
+    {
+      "id": "2",
+      "name": "SKINNY FIT JEANS",
+      "price": 130,
+      "originalPrice": 160,
+      "discountPercentage": 30,
+      "rating": 3.5,
+      "imageUrl": "https://picsum.photos/seed/jeans1/295/298.jpg"
+    },
+    {
+      "id": "3",
+      "name": "CHECKERED SHIRT",
+      "price": 180,
+      "originalPrice": 240,
+      "discountPercentage": 20,
+      "rating": 4.5,
+      "imageUrl": "https://picsum.photos/seed/shirt1/295/298.jpg"
+    },
+    {
+      "id": "4",
+      "name": "SLEEVE STRIPED T-SHIRT",
+      "price": 180,
+      "originalPrice": 240,
+      "discountPercentage": 20,
+      "rating": 4.5,
+      "imageUrl": "https://picsum.photos/seed/striped1/295/298.jpg"
+    }
+  ],
+  "topSelling": [
+    {
+      "id": "5",
+      "name": "VERTICAL STRIPED SHIRT",
+      "price": 212,
+      "originalPrice": 232,
+      "discountPercentage": 10,
+      "rating": 5.0,
+      "imageUrl": "https://picsum.photos/seed/vertical1/295/298.jpg"
+    },
+    {
+      "id": "6",
+      "name": "COURAGE GRAPHIC T-SHIRT",
+      "price": 145,
+      "rating": 4.0,
+      "imageUrl": "https://picsum.photos/seed/graphic1/295/298.jpg"
+    },
+    {
+      "id": "7",
+      "name": "LOOSE FIT BERMUDA SHORTS",
+      "price": 80,
+      "rating": 3.0,
+      "imageUrl": "https://picsum.photos/seed/shorts1/295/298.jpg"
+    },
+    {
+      "id": "8",
+      "name": "FADED SKINNY JEANS",
+      "price": 210,
+      "rating": 4.5,
+      "imageUrl": "https://picsum.photos/seed/faded1/295/298.jpg"
+    }
+  ]
+}

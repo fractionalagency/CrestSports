@@ -1,4 +1,7 @@
 "use client";
+
+import { NewArrivals, TopSelling } from '@/components/ProductGrid';
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -183,7 +186,7 @@ export default function Home() {
             
             {/* Shop Now Button */}
             <button 
-              className="inline-flex items-center justify-center px-12 py-4 font-semibold rounded-full transition-colors duration-200 text-lg"
+              className="inline-flex items-center justify-center px-12 py-4 font-semibold rounded-full transition-colors duration-200 text-lg hover:bg-gray-800"
               style={{ 
                 backgroundColor: '#000000',
                 color: '#FFFFFF',
@@ -191,8 +194,6 @@ export default function Home() {
                 fontWeight: 600,
                 borderRadius: '62px'
               }}
-              onMouseOver={(e) => e.target.style.backgroundColor = '#333333'}
-              onMouseOut={(e) => e.target.style.backgroundColor = '#000000'}
             >
               Shop Now
             </button>
@@ -200,39 +201,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Long content section to demonstrate sticky header */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Scroll to see the sticky header in action</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(12)].map((_, i) => (
-              <div key={i} className="bg-white rounded-lg shadow-md p-6">
-                <div className="h-48 bg-gray-200 rounded-lg mb-4"></div>
-                <h3 className="text-xl font-semibold mb-2">Product {i + 1}</h3>
-                <p className="text-gray-600 mb-4">Description for product {i + 1}</p>
-                <p className="text-2xl font-bold">${(i + 1) * 50}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* New Arrivals Section */}
+      <NewArrivals />
 
-      {/* More content to ensure scrolling */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">More Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="bg-gray-50 rounded-lg p-4">
-                <div className="h-40 bg-gray-200 rounded-lg mb-3"></div>
-                <h4 className="text-lg font-medium mb-1">Item {i + 1}</h4>
-                <p className="text-gray-600 text-sm mb-2">Brief description</p>
-                <p className="text-lg font-bold">${(i + 1) * 25}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Top Selling Section */}
+      <TopSelling />
     </div>
   );
 }
