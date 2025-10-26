@@ -7,9 +7,9 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative" style={{ backgroundColor: '#000000' }}>
-        {/* Hero Background Image */}
-        <div className="absolute inset-0">
+      <section className="relative md:bg-black" style={{ backgroundColor: '#F4F2F3' }}>
+        {/* Desktop: Hero Background Image */}
+        <div className="hidden md:absolute md:inset-0 md:block">
           <img 
             src="/hero-bg.png" 
             alt="Hero background" 
@@ -18,8 +18,8 @@ export default function Home() {
           />
         </div>
         
-        {/* SVG Shapes - Positioned according to Figma design */}
-        <div className="absolute inset-0 pointer-events-none">
+        {/* SVG Shapes - Desktop Only */}
+        <div className="hidden md:absolute md:inset-0 md:pointer-events-none md:block">
           {/* Large Vector - Top Right */}
           <img 
             src="/vector-1.svg" 
@@ -88,100 +88,189 @@ export default function Home() {
               designed to bring out your individuality and cater to your sense of style.
             </p>
             
-            {/* Stats Section - Stacked with hero content */}
-            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mb-8">
-              {/* 200+ International Brands */}
-              <div className="flex flex-col">
-                <h3 
-                  className="text-3xl md:text-4xl font-bold mb-1"
+            {/* Stats Section - Different layouts for desktop and mobile */}
+            <div className="mb-8">
+              {/* Desktop Layout */}
+              <div className="hidden md:flex md:flex-row md:items-center md:gap-8">
+                {/* 200+ International Brands */}
+                <div className="flex flex-col">
+                  <h3 
+                    className="text-4xl font-bold mb-1"
+                    style={{ 
+                      fontFamily: 'Montserrat',
+                      fontWeight: 700,
+                      color: '#000000',
+                      fontSize: '40px',
+                      lineHeight: '1.35em'
+                    }}
+                  >
+                    200+
+                  </h3>
+                  <p 
+                    className="text-base"
+                    style={{ 
+                      fontFamily: 'Satoshi',
+                      color: 'rgba(0, 0, 0, 0.6)',
+                      fontSize: '16px'
+                    }}
+                  >
+                    International Brands
+                  </p>
+                </div>
+                
+                {/* Divider Line */}
+                <div 
+                  className="w-px h-12"
                   style={{ 
-                    fontFamily: 'Montserrat',
-                    fontWeight: 700,
-                    color: '#000000',
-                    fontSize: '40px',
-                    lineHeight: '1.35em'
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)'
                   }}
-                >
-                  200+
-                </h3>
-                <p 
-                  className="text-sm md:text-base"
+                ></div>
+                
+                {/* 2,000+ High-Quality Products */}
+                <div className="flex flex-col">
+                  <h3 
+                    className="text-4xl font-bold mb-1"
+                    style={{ 
+                      fontFamily: 'Montserrat',
+                      fontWeight: 700,
+                      color: '#000000',
+                      fontSize: '40px',
+                      lineHeight: '1.35em'
+                    }}
+                  >
+                    2,000+
+                  </h3>
+                  <p 
+                    className="text-base"
+                    style={{ 
+                      fontFamily: 'Satoshi',
+                      color: 'rgba(0, 0, 0, 0.6)',
+                      fontSize: '16px'
+                    }}
+                  >
+                    High-Quality Products
+                  </p>
+                </div>
+                
+                {/* Divider Line */}
+                <div 
+                  className="w-px h-12"
                   style={{ 
-                    fontFamily: 'Satoshi',
-                    color: 'rgba(0, 0, 0, 0.6)',
-                    fontSize: '16px'
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)'
                   }}
-                >
-                  International Brands
-                </p>
+                ></div>
+                
+                {/* 30,000+ Happy Customers */}
+                <div className="flex flex-col">
+                  <h3 
+                    className="text-4xl font-bold mb-1"
+                    style={{ 
+                      fontFamily: 'Montserrat',
+                      fontWeight: 700,
+                      color: '#000000',
+                      fontSize: '40px',
+                      lineHeight: '1.35em'
+                    }}
+                  >
+                    30,000+
+                  </h3>
+                  <p 
+                    className="text-base"
+                    style={{ 
+                      fontFamily: 'Satoshi',
+                      color: 'rgba(0, 0, 0, 0.6)',
+                      fontSize: '16px'
+                    }}
+                  >
+                    Happy Customers
+                  </p>
+                </div>
               </div>
               
-              {/* Divider Line */}
-              <div 
-                className="hidden md:block w-px h-12"
-                style={{ 
-                  backgroundColor: 'rgba(0, 0, 0, 0.2)'
-                }}
-              ></div>
-              
-              {/* 2,000+ High-Quality Products */}
-              <div className="flex flex-col">
-                <h3 
-                  className="text-3xl md:text-4xl font-bold mb-1"
-                  style={{ 
-                    fontFamily: 'Montserrat',
-                    fontWeight: 700,
-                    color: '#000000',
-                    fontSize: '40px',
-                    lineHeight: '1.35em'
-                  }}
-                >
-                  2,000+
-                </h3>
-                <p 
-                  className="text-sm md:text-base"
-                  style={{ 
-                    fontFamily: 'Satoshi',
-                    color: 'rgba(0, 0, 0, 0.6)',
-                    fontSize: '16px'
-                  }}
-                >
-                  High-Quality Products
-                </p>
-              </div>
-              
-              {/* Divider Line */}
-              <div 
-                className="hidden md:block w-px h-12"
-                style={{ 
-                  backgroundColor: 'rgba(0, 0, 0, 0.2)'
-                }}
-              ></div>
-              
-              {/* 30,000+ Happy Customers */}
-              <div className="flex flex-col">
-                <h3 
-                  className="text-3xl md:text-4xl font-bold mb-1"
-                  style={{ 
-                    fontFamily: 'Montserrat',
-                    fontWeight: 700,
-                    color: '#000000',
-                    fontSize: '40px',
-                    lineHeight: '1.35em'
-                  }}
-                >
-                  30,000+
-                </h3>
-                <p 
-                  className="text-sm md:text-base"
-                  style={{ 
-                    fontFamily: 'Satoshi',
-                    color: 'rgba(0, 0, 0, 0.6)',
-                    fontSize: '16px'
-                  }}
-                >
-                  Happy Customers
-                </p>
+              {/* Mobile Layout - 2-1 Grid */}
+              <div className="md:hidden">
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  {/* 200+ International Brands */}
+                  <div className="flex flex-col">
+                    <h3 
+                      className="text-2xl font-bold mb-1"
+                      style={{ 
+                        fontFamily: 'Montserrat',
+                        fontWeight: 700,
+                        color: '#000000',
+                        fontSize: '32px',
+                        lineHeight: '1.35em'
+                      }}
+                    >
+                      200+
+                    </h3>
+                    <p 
+                      className="text-sm"
+                      style={{ 
+                        fontFamily: 'Satoshi',
+                        color: 'rgba(0, 0, 0, 0.6)',
+                        fontSize: '14px'
+                      }}
+                    >
+                      International Brands
+                    </p>
+                  </div>
+                  
+                  {/* 2,000+ High-Quality Products */}
+                  <div className="flex flex-col">
+                    <h3 
+                      className="text-2xl font-bold mb-1"
+                      style={{ 
+                        fontFamily: 'Montserrat',
+                        fontWeight: 700,
+                        color: '#000000',
+                        fontSize: '32px',
+                        lineHeight: '1.35em'
+                      }}
+                    >
+                      2,000+
+                    </h3>
+                    <p 
+                      className="text-sm"
+                      style={{ 
+                        fontFamily: 'Satoshi',
+                        color: 'rgba(0, 0, 0, 0.6)',
+                        fontSize: '14px'
+                      }}
+                    >
+                      High-Quality Products
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Second row with single item */}
+                <div className="grid grid-cols-1 gap-4">
+                  {/* 30,000+ Happy Customers */}
+                  <div className="flex flex-col">
+                    <h3 
+                      className="text-2xl font-bold mb-1"
+                      style={{ 
+                        fontFamily: 'Montserrat',
+                        fontWeight: 700,
+                        color: '#000000',
+                        fontSize: '32px',
+                        lineHeight: '1.35em'
+                      }}
+                    >
+                      30,000+
+                    </h3>
+                    <p 
+                      className="text-sm"
+                      style={{ 
+                        fontFamily: 'Satoshi',
+                        color: 'rgba(0, 0, 0, 0.6)',
+                        fontSize: '14px'
+                      }}
+                    >
+                      Happy Customers
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             
@@ -199,6 +288,16 @@ export default function Home() {
               Shop Now
             </button>
           </div>
+        </div>
+        
+        {/* Mobile: Hero Background Image Below Content */}
+        <div className="md:hidden relative w-full -mt-48 z-0">
+          <img 
+            src="/hero-bg.png" 
+            alt="Hero background" 
+            className="w-full h-auto object-cover scale-175"
+            style={{ opacity: 0.9 }}
+          />
         </div>
       </section>
 
