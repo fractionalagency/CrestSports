@@ -81,7 +81,7 @@ export default function Home() {
               className="text-lg md:text-xl mb-8 leading-relaxed max-w-lg"
               style={{ 
                 color: 'rgba(0, 0, 0, 0.6)',
-                fontFamily: 'Inter'
+                fontFamily: 'Satoshi'
               }}
             >
               Browse through our diverse range of meticulously crafted garments, 
@@ -107,7 +107,7 @@ export default function Home() {
                 <p 
                   className="text-sm md:text-base"
                   style={{ 
-                    fontFamily: 'Inter',
+                    fontFamily: 'Satoshi',
                     color: 'rgba(0, 0, 0, 0.6)',
                     fontSize: '16px'
                   }}
@@ -141,7 +141,7 @@ export default function Home() {
                 <p 
                   className="text-sm md:text-base"
                   style={{ 
-                    fontFamily: 'Inter',
+                    fontFamily: 'Satoshi',
                     color: 'rgba(0, 0, 0, 0.6)',
                     fontSize: '16px'
                   }}
@@ -175,7 +175,7 @@ export default function Home() {
                 <p 
                   className="text-sm md:text-base"
                   style={{ 
-                    fontFamily: 'Inter',
+                    fontFamily: 'Satoshi',
                     color: 'rgba(0, 0, 0, 0.6)',
                     fontSize: '16px'
                   }}
@@ -191,8 +191,8 @@ export default function Home() {
               style={{ 
                 backgroundColor: '#000000',
                 color: '#FFFFFF',
-                fontFamily: 'Montserrat',
-                fontWeight: 600,
+                fontFamily: 'Satoshi',
+                fontWeight: 500,
                 borderRadius: '62px'
               }}
             >

@@ -3,6 +3,21 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 
+const satoshi = localFont({
+  src: "../fonts/satoshi/Satoshi-Bold.otf",
+  variable: "--font-satoshi",
+  weight: "700",
+});
+const satoshiMedium = localFont({
+  src: "../fonts/satoshi/Satoshi-Bold.otf",
+  variable: "--font-satoshi-medium",
+  weight: "700",
+});
+const satoshiBold = localFont({
+  src: "../fonts/satoshi/Satoshi-Black.otf",
+  variable: "--font-satoshi-bold",
+  weight: "900",
+});
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -25,7 +40,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${satoshi.variable} ${satoshiMedium.variable} ${satoshiBold.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{ fontFamily: 'Satoshi, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
       >
         <Header />
         <main>{children}</main>

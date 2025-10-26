@@ -2,16 +2,16 @@
 
 export default function Footer() {
   return (
-    <div className="w-full">
-      {/* Newsletter CTA Section - Full width but content centered */}
-      <div className="w-full flex justify-center px-4">
+    <div className="w-full relative">
+      {/* Newsletter CTA Section - Overlapping section */}
+      <div className="w-full flex justify-center px-4 relative z-20 -mb-20">
         <div className="w-[80%] max-w-[1240px]">
-          <div className="bg-black text-white rounded-[20px] p-[36px]">
-          <div className="flex flex-col lg:flex-row justify-between items-center gap-[153px]">
+          <div className="bg-black text-white rounded-[20px] p-[40px] shadow-xl">
+          <div className="flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-8">
             {/* Left - Heading */}
-            <div className="w-[551px] h-[94px]">
+            <div className="flex-1">
               <h2 
-                className="text-[40px] font-bold leading-[1.125em]"
+                className="text-[32px] lg:text-[36px] font-bold leading-[1.125em]"
                 style={{ 
                   fontFamily: 'Integral CF', 
                   fontWeight: 700,
@@ -25,13 +25,13 @@ export default function Footer() {
             </div>
 
             {/* Right - Email Form */}
-            <div className="flex flex-col gap-[14px]">
+            <div className="flex flex-col gap-[12px] lg:w-[320px]">
               {/* Email Input */}
-              <div className="flex items-center gap-[12px] bg-white rounded-[62px] p-[12px_16px] w-[349px]">
+              <div className="flex items-center gap-[10px] bg-white rounded-[62px] p-[10px_14px] w-full">
                 <img 
                   src="/search-icon.svg" 
                   alt="Search" 
-                  className="w-[24px] h-[24px]"
+                  className="w-[20px] h-[20px]"
                 />
                 <input 
                   type="email" 
@@ -40,7 +40,7 @@ export default function Footer() {
                   style={{ 
                     fontFamily: 'Satoshi', 
                     fontWeight: 400,
-                    fontSize: '16px',
+                    fontSize: '14px',
                     lineHeight: '1.35em'
                   }}
                 />
@@ -48,11 +48,11 @@ export default function Footer() {
               
               {/* Subscribe Button */}
               <button 
-                className="flex items-center justify-center gap-[12px] bg-white text-black rounded-[62px] p-[12px_16px] w-[349px] hover:bg-gray-100 transition-colors"
+                className="flex items-center justify-center gap-[10px] bg-white text-black rounded-[62px] p-[10px_14px] w-full hover:bg-gray-100 transition-colors"
                 style={{ 
                   fontFamily: 'Satoshi',
                   fontWeight: 500,
-                  fontSize: '16px',
+                  fontSize: '14px',
                   lineHeight: '1.35em'
                 }}
               >
@@ -65,7 +65,7 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Content - Full width but content centered */}
-      <div className="w-full bg-[#F0F0F0] flex justify-center px-4 mt-8">
+      <div className="w-full bg-[#F0F0F0] flex justify-center px-4 pt-16">
         <div className="w-[80%] max-w-[1240px]">
           <div className="rounded-[20px] p-[64px_101px]">
           {/* Top Section - Links */}
