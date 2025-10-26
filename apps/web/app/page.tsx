@@ -1,6 +1,7 @@
 "use client";
 
 import { NewArrivals, TopSelling } from '@/components/ProductGrid';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -206,6 +207,9 @@ export default function Home() {
 
       {/* Top Selling Section */}
       <TopSelling />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
