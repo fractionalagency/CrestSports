@@ -84,6 +84,103 @@ export default function Home() {
               designed to bring out your individuality and cater to your sense of style.
             </p>
             
+            {/* Stats Section - Stacked with hero content */}
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-8 mb-8">
+              {/* 200+ International Brands */}
+              <div className="flex flex-col">
+                <h3 
+                  className="text-3xl md:text-4xl font-bold mb-1"
+                  style={{ 
+                    fontFamily: 'Montserrat',
+                    fontWeight: 700,
+                    color: '#000000',
+                    fontSize: '40px',
+                    lineHeight: '1.35em'
+                  }}
+                >
+                  200+
+                </h3>
+                <p 
+                  className="text-sm md:text-base"
+                  style={{ 
+                    fontFamily: 'Inter',
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    fontSize: '16px'
+                  }}
+                >
+                  International Brands
+                </p>
+              </div>
+              
+              {/* Divider Line */}
+              <div 
+                className="hidden md:block w-px h-12"
+                style={{ 
+                  backgroundColor: 'rgba(0, 0, 0, 0.2)'
+                }}
+              ></div>
+              
+              {/* 2,000+ High-Quality Products */}
+              <div className="flex flex-col">
+                <h3 
+                  className="text-3xl md:text-4xl font-bold mb-1"
+                  style={{ 
+                    fontFamily: 'Montserrat',
+                    fontWeight: 700,
+                    color: '#000000',
+                    fontSize: '40px',
+                    lineHeight: '1.35em'
+                  }}
+                >
+                  2,000+
+                </h3>
+                <p 
+                  className="text-sm md:text-base"
+                  style={{ 
+                    fontFamily: 'Inter',
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    fontSize: '16px'
+                  }}
+                >
+                  High-Quality Products
+                </p>
+              </div>
+              
+              {/* Divider Line */}
+              <div 
+                className="hidden md:block w-px h-12"
+                style={{ 
+                  backgroundColor: 'rgba(0, 0, 0, 0.2)'
+                }}
+              ></div>
+              
+              {/* 30,000+ Happy Customers */}
+              <div className="flex flex-col">
+                <h3 
+                  className="text-3xl md:text-4xl font-bold mb-1"
+                  style={{ 
+                    fontFamily: 'Montserrat',
+                    fontWeight: 700,
+                    color: '#000000',
+                    fontSize: '40px',
+                    lineHeight: '1.35em'
+                  }}
+                >
+                  30,000+
+                </h3>
+                <p 
+                  className="text-sm md:text-base"
+                  style={{ 
+                    fontFamily: 'Inter',
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    fontSize: '16px'
+                  }}
+                >
+                  Happy Customers
+                </p>
+              </div>
+            </div>
+            
             {/* Shop Now Button */}
             <button 
               className="inline-flex items-center justify-center px-12 py-4 font-semibold rounded-full transition-colors duration-200 text-lg"
@@ -99,109 +196,6 @@ export default function Home() {
             >
               Shop Now
             </button>
-          </div>
-          
-          {/* Stats Section - Within Hero Section */}
-          <div 
-            className="absolute flex items-center gap-8 md:gap-16"
-            style={{ 
-              left: '104px', // Align with container padding (100px + 4px)
-              top: '650px'
-            }}
-          >
-            {/* 200+ International Brands */}
-            <div className="flex flex-col items-center text-center">
-              <h3 
-                className="text-3xl md:text-4xl font-bold mb-1"
-                style={{ 
-                  fontFamily: 'Montserrat',
-                  fontWeight: 700,
-                  color: '#000000',
-                  fontSize: '40px',
-                  lineHeight: '1.35em'
-                }}
-              >
-                200+
-              </h3>
-              <p 
-                className="text-sm md:text-base whitespace-nowrap"
-                style={{ 
-                  fontFamily: 'Inter',
-                  color: 'rgba(0, 0, 0, 0.6)',
-                  fontSize: '16px'
-                }}
-              >
-                International Brands
-              </p>
-            </div>
-            
-            {/* Divider Line */}
-            <div 
-              className="hidden md:block w-px h-12"
-              style={{ 
-                backgroundColor: 'rgba(0, 0, 0, 0.2)'
-              }}
-            ></div>
-            
-            {/* 2,000+ High-Quality Products */}
-            <div className="flex flex-col items-center text-center">
-              <h3 
-                className="text-3xl md:text-4xl font-bold mb-1"
-                style={{ 
-                  fontFamily: 'Montserrat',
-                  fontWeight: 700,
-                  color: '#000000',
-                  fontSize: '40px',
-                  lineHeight: '1.35em'
-                }}
-              >
-                2,000+
-              </h3>
-              <p 
-                className="text-sm md:text-base whitespace-nowrap"
-                style={{ 
-                  fontFamily: 'Inter',
-                  color: 'rgba(0, 0, 0, 0.6)',
-                  fontSize: '16px'
-                }}
-              >
-                High-Quality Products
-              </p>
-            </div>
-            
-            {/* Divider Line */}
-            <div 
-              className="hidden md:block w-px h-12"
-              style={{ 
-                backgroundColor: 'rgba(0, 0, 0, 0.2)'
-              }}
-            ></div>
-            
-            {/* 30,000+ Happy Customers */}
-            <div className="flex flex-col items-center text-center">
-              <h3 
-                className="text-3xl md:text-4xl font-bold mb-1"
-                style={{ 
-                  fontFamily: 'Montserrat',
-                  fontWeight: 700,
-                  color: '#000000',
-                  fontSize: '40px',
-                  lineHeight: '1.35em'
-                }}
-              >
-                30,000+
-              </h3>
-              <p 
-                className="text-sm md:text-base whitespace-nowrap"
-                style={{ 
-                  fontFamily: 'Inter',
-                  color: 'rgba(0, 0, 0, 0.6)',
-                  fontSize: '16px'
-                }}
-              >
-                Happy Customers
-              </p>
-            </div>
           </div>
         </div>
       </section>
