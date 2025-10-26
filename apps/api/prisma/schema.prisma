@@ -1,0 +1,223 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// PRODUCT MANAGEMENT
+// ============================================
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  imageUrl    String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("categories")
+}
+
+model Product {
+  id          String       @id @default(cuid())
+  name        String
+  slug        String       @unique
+  description String?
+  price       Float
+  salePrice   Float?
+  sku         String       @unique
+  stock       Int          @default(0)
+  imageUrl    String?
+  images      String[]
+  categoryId  String
+  category    Category     @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  isActive    Boolean      @default(true)
+  isFeatured  Boolean      @default(false)
+  metadata    Json?
+  orderItems  OrderItem[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([categoryId])
+  @@index([slug])
+  @@index([isActive, isFeatured])
+  @@map("products")
+}
+
+// ============================================
+// ORDER MANAGEMENT
+// ============================================
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+model Order {
+  id              String        @id @default(cuid())
+  trackingId      String        @unique
+  
+  // Customer Information
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  
+  // Shipping Address
+  shippingAddress Json
+  
+  // Order Details
+  items           OrderItem[]
+  subtotal        Float
+  tax             Float         @default(0)
+  shippingCost    Float         @default(0)
+  discount        Float         @default(0)
+  total           Float
+  
+  // Payment
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentId       String?       @unique
+  paymentMethod   String?
+  razorpayOrderId String?       @unique
+  razorpayPaymentId String?     @unique
+  razorpaySignature String?
+  
+  // Order Status
+  status          OrderStatus   @default(PENDING)
+  statusHistory   Json[]
+  
+  // Tracking & Notes
+  trackingNumber  String?
+  notes           String?
+  metadata        Json?
+  
+  // Timestamps
+  paidAt          DateTime?
+  shippedAt       DateTime?
+  deliveredAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([trackingId])
+  @@index([customerEmail])
+  @@index([status])
+  @@index([paymentStatus])
+  @@index([createdAt])
+  @@map("orders")
+}
+
+model OrderItem {
+  id         String   @id @default(cuid())
+  orderId    String
+  order      Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  
+  name       String
+  sku        String
+  price      Float
+  quantity   Int
+  total      Float
+  
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+// ============================================
+// ADMIN / USER MANAGEMENT (Optional for future)
+// ============================================
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  STAFF
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      UserRole @default(STAFF)
+  isActive  Boolean  @default(true)
+  lastLogin DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admins")
+}
+
+// ============================================
+// EMAIL TRACKING
+// ============================================
+
+enum EmailType {
+  ORDER_CONFIRMATION
+  ORDER_SHIPPED
+  ORDER_DELIVERED
+  ORDER_CANCELLED
+  PASSWORD_RESET
+}
+
+model EmailLog {
+  id        String    @id @default(cuid())
+  to        String
+  subject   String
+  type      EmailType
+  orderId   String?
+  sent      Boolean   @default(false)
+  sentAt    DateTime?
+  error     String?
+  metadata  Json?
+  createdAt DateTime  @default(now())
+
+  @@index([orderId])
+  @@index([to])
+  @@index([createdAt])
+  @@map("email_logs")
+}
+
+// ============================================
+// ANALYTICS / TRACKING (Optional)
+// ============================================
+
+model Analytics {
+  id        String   @id @default(cuid())
+  event     String
+  page      String?
+  userId    String?
+  sessionId String?
+  metadata  Json?
+  ip        String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([event])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("analytics")
+}
