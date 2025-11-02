@@ -139,7 +139,7 @@ export default function Footer() {
               <ul className="space-y-3" style={{ fontFamily: "Satoshi" }}>
                 <li>
                   <a
-                    href="#"
+                    href="/contact"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Contact Us
@@ -147,7 +147,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/shipping"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Shipping & Delivery
@@ -155,7 +155,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/returns"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Returns & Exchanges
@@ -163,7 +163,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/size-guide"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Size Guide
@@ -171,7 +171,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/track-order"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Track Order
@@ -191,7 +191,7 @@ export default function Footer() {
               <ul className="space-y-3" style={{ fontFamily: "Satoshi" }}>
                 <li>
                   <a
-                    href="#"
+                    href="/about"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     About Us
@@ -199,7 +199,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/terms"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Terms & Conditions
@@ -207,7 +207,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/privacy"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Privacy Policy
@@ -215,7 +215,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/authenticity"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Authenticity Guarantee
@@ -223,7 +223,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="/careers"
                     className="text-gray-400 hover:text-white transition-colors text-sm"
                   >
                     Careers
