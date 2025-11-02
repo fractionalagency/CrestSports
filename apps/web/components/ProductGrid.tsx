@@ -92,27 +92,28 @@ const ProductGrid: React.FC<ProductGridProps> = ({
     );
   }
   return (
-    <section className={`py-16 ${className}`}>
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
-          <div className="mb-4 md:mb-0">
+    <section className={`py-6 md:py-10 ${className}`}>
+      <div className="max-w-7xl mx-auto px-2 md:px-4">
+        {/* Header - True H&M Style */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 md:mb-8">
+          <div className="mb-3 md:mb-0">
             <h2 
-              className="text-[32px] md:text-[40px] font-bold mb-2 leading-[1.2]"
+              className="text-xl md:text-2xl font-bold mb-1"
               style={{ 
-                fontFamily: 'Integral CF',
+                fontFamily: 'Helvetica Neue, Arial, sans-serif',
                 fontWeight: 700,
-                color: '#000000'
+                color: '#000000',
+                letterSpacing: '-0.02em'
               }}
             >
               {title}
             </h2>
             {subtitle && (
               <p 
-                className="text-[16px] leading-[1.57]"
+                className="text-sm text-gray-600 mt-1"
                 style={{ 
-                  fontFamily: 'Satoshi',
-                  color: 'rgba(0, 0, 0, 0.6)'
+                  fontFamily: 'Helvetica Neue, Arial, sans-serif',
+                  fontWeight: 400
                 }}
               >
                 {subtitle}
@@ -122,11 +123,10 @@ const ProductGrid: React.FC<ProductGridProps> = ({
           
           {showViewAll && (
             <button 
-              className="px-[54px] py-[16px] rounded-[62px] border border-black transition-colors duration-200 hover:bg-black hover:text-white"
+              className="px-4 py-2 border border-black text-sm font-medium transition-all duration-300 hover:bg-black hover:text-white"
               style={{ 
-                fontFamily: 'Satoshi',
-                fontWeight: 500,
-                fontSize: '16px'
+                fontFamily: 'Helvetica Neue, Arial, sans-serif',
+                fontWeight: 500
               }}
             >
               View All
@@ -134,8 +134,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({
           )}
         </div>
         
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Products Grid - True H&M Seamless Style */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-2">
           {productData.map((product) => (
             <ProductCard
               key={product.id}
@@ -149,6 +149,19 @@ const ProductGrid: React.FC<ProductGridProps> = ({
             />
           ))}
         </div>
+        
+        {/* Load More Button - H&M Style */}
+        <div className="flex justify-center mt-8 md:mt-10">
+          <button 
+            className="px-6 py-2 bg-black text-white text-sm font-medium transition-all duration-300 hover:bg-gray-800"
+            style={{ 
+              fontFamily: 'Helvetica Neue, Arial, sans-serif',
+              fontWeight: 500
+            }}
+          >
+            Load more
+          </button>
+        </div>
       </div>
     </section>
   );
@@ -159,14 +172,49 @@ export default ProductGrid;
 // Export pre-configured product grids for easy use
 export const NewArrivals: React.FC<{ className?: string }> = ({ className }) => (
   <ProductGrid 
-    title="NEW ARRIVALS" 
+    title="New arrivals" 
+    subtitle="Check out our latest collection"
     className={className}
   />
 );
 
 export const TopSelling: React.FC<{ className?: string }> = ({ className }) => (
   <ProductGrid 
-    title="top selling" 
+    title="Top selling" 
+    subtitle="Our most popular items right now"
+    className={className}
+  />
+);
+
+// New H&M-style sections
+export const Essentials: React.FC<{ className?: string }> = ({ className }) => (
+  <ProductGrid 
+    title="Essentials" 
+    subtitle="Basic clothing for everyday comfort"
+    className={className}
+  />
+);
+
+export const TrendingNow: React.FC<{ className?: string }> = ({ className }) => (
+  <ProductGrid 
+    title="Trending now" 
+    subtitle="The hottest items this season"
+    className={className}
+  />
+);
+
+export const Basics: React.FC<{ className?: string }> = ({ className }) => (
+  <ProductGrid 
+    title="Basics" 
+    subtitle="Simple and versatile pieces"
+    className={className}
+  />
+);
+
+export const Featured: React.FC<{ className?: string }> = ({ className }) => (
+  <ProductGrid 
+    title="Featured" 
+    subtitle="Handpicked favorites"
     className={className}
   />
 );

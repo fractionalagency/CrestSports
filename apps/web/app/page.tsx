@@ -1,6 +1,6 @@
 "use client";
 
-import { NewArrivals, TopSelling } from '@/components/ProductGrid';
+import { NewArrivals, TopSelling, Essentials, TrendingNow, Basics } from '@/components/ProductGrid';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -304,8 +304,17 @@ export default function Home() {
       {/* New Arrivals Section */}
       <NewArrivals />
 
+      {/* Trending Now Section */}
+      <TrendingNow />
+
+      {/* Essentials Section */}
+      <Essentials />
+
       {/* Top Selling Section */}
       <TopSelling />
+
+      {/* Basics Section */}
+      <Basics />
 
       {/* Footer */}
       <Footer />
