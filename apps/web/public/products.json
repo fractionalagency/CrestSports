@@ -2,69 +2,77 @@
   "newArrivals": [
     {
       "id": "1",
-      "name": "T-SHIRT WITH TAPE DETAILS",
-      "price": 120,
+      "name": "MANCHESTER UNITED HOME JERSEY 2024",
+      "price": 89,
       "rating": 4.5,
-      "imageUrl": "https://picsum.photos/seed/tshirt1/295/298.jpg"
+      "imageUrl": "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=295&h=398&fit=crop",
+      "hoverImageUrl": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=295&h=398&fit=crop"
     },
     {
       "id": "2",
-      "name": "SKINNY FIT JEANS",
-      "price": 130,
-      "originalPrice": 160,
-      "discountPercentage": 30,
-      "rating": 3.5,
-      "imageUrl": "https://picsum.photos/seed/jeans1/295/298.jpg"
+      "name": "REAL MADRID AWAY JERSEY 2024",
+      "price": 95,
+      "originalPrice": 110,
+      "discountPercentage": 15,
+      "rating": 4.8,
+      "imageUrl": "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=295&h=398&fit=crop",
+      "hoverImageUrl": "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=295&h=398&fit=crop"
     },
     {
       "id": "3",
-      "name": "CHECKERED SHIRT",
-      "price": 180,
-      "originalPrice": 240,
+      "name": "BARCELONA HOME JERSEY 2024",
+      "price": 92,
+      "originalPrice": 115,
       "discountPercentage": 20,
-      "rating": 4.5,
-      "imageUrl": "https://picsum.photos/seed/shirt1/295/298.jpg"
+      "rating": 4.7,
+      "imageUrl": "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=295&h=398&fit=crop",
+      "hoverImageUrl": "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=295&h=398&fit=crop"
     },
     {
       "id": "4",
-      "name": "SLEEVE STRIPED T-SHIRT",
-      "price": 180,
-      "originalPrice": 240,
-      "discountPercentage": 20,
-      "rating": 4.5,
-      "imageUrl": "https://picsum.photos/seed/striped1/295/298.jpg"
+      "name": "LIVERPOOL THIRD JERSEY 2024",
+      "price": 88,
+      "originalPrice": 105,
+      "discountPercentage": 16,
+      "rating": 4.6,
+      "imageUrl": "https://images.unsplash.com/photo-1592656094267-764a45160876?w=295&h=398&fit=crop",
+      "hoverImageUrl": "https://images.unsplash.com/photo-1508667287040-8fbb0c22d365?w=295&h=398&fit=crop"
     }
   ],
   "topSelling": [
     {
       "id": "5",
-      "name": "VERTICAL STRIPED SHIRT",
-      "price": 212,
-      "originalPrice": 232,
-      "discountPercentage": 10,
+      "name": "PARIS SAINT-GERMAIN HOME JERSEY 2024",
+      "price": 99,
+      "originalPrice": 120,
+      "discountPercentage": 18,
       "rating": 5.0,
-      "imageUrl": "https://picsum.photos/seed/vertical1/295/298.jpg"
+      "imageUrl": "https://images.unsplash.com/photo-1555488205-6a1a0e41877b?w=295&h=398&fit=crop",
+      "hoverImageUrl": "https://images.unsplash.com/photo-1511886929837-354d827aae26?w=295&h=398&fit=crop"
     },
     {
       "id": "6",
-      "name": "COURAGE GRAPHIC T-SHIRT",
-      "price": 145,
-      "rating": 4.0,
-      "imageUrl": "https://picsum.photos/seed/graphic1/295/298.jpg"
+      "name": "CHELSEA AWAY JERSEY 2024",
+      "price": 85,
+      "rating": 4.4,
+      "imageUrl": "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=295&h=398&fit=crop",
+      "hoverImageUrl": "https://images.unsplash.com/photo-1605534811269-6d4e11362ff7?w=295&h=398&fit=crop"
     },
     {
       "id": "7",
-      "name": "LOOSE FIT BERMUDA SHORTS",
-      "price": 80,
-      "rating": 3.0,
-      "imageUrl": "https://picsum.photos/seed/shorts1/295/298.jpg"
+      "name": "ARSENAL HOME JERSEY 2024",
+      "price": 87,
+      "rating": 4.5,
+      "imageUrl": "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=295&h=398&fit=crop",
+      "hoverImageUrl": "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=295&h=398&fit=crop"
     },
     {
       "id": "8",
-      "name": "FADED SKINNY JEANS",
-      "price": 210,
-      "rating": 4.5,
-      "imageUrl": "https://picsum.photos/seed/faded1/295/298.jpg"
+      "name": "BAYERN MUNICH HOME JERSEY 2024",
+      "price": 94,
+      "rating": 4.9,
+      "imageUrl": "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=295&h=398&fit=crop",
+      "hoverImageUrl": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=295&h=398&fit=crop"
     }
   ]
 }

@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  NewArrivals,
-  TopSelling,
-  Essentials,
-  TrendingNow,
-  Basics,
-} from "@/components/ProductGrid";
+import { NewArrivals, TopSelling } from "@/components/ProductGrid";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -69,7 +63,7 @@ export default function Home() {
                 color: "#000000",
               }}
             >
-              FIND CLOTHES THAT MATCHES YOUR STYLE
+              WEAR YOUR TEAM WITH PRIDE
             </h1>
 
             {/* Description */}
@@ -80,9 +74,8 @@ export default function Home() {
                 fontFamily: "Satoshi",
               }}
             >
-              Browse through our diverse range of meticulously crafted garments,
-              designed to bring out your individuality and cater to your sense
-              of style.
+              Discover authentic football jerseys from top clubs and national
+              teams. Premium quality, official designs, and fast delivery.
             </p>
 
             {/* Stats Section - Different layouts for desktop and mobile */}
@@ -101,7 +94,7 @@ export default function Home() {
                       lineHeight: "1.35em",
                     }}
                   >
-                    200+
+                    100+
                   </h3>
                   <p
                     className="text-base"
@@ -111,7 +104,7 @@ export default function Home() {
                       fontSize: "16px",
                     }}
                   >
-                    International Brands
+                    Football Clubs
                   </p>
                 </div>
 
@@ -135,7 +128,7 @@ export default function Home() {
                       lineHeight: "1.35em",
                     }}
                   >
-                    2,000+
+                    500+
                   </h3>
                   <p
                     className="text-base"
@@ -145,7 +138,7 @@ export default function Home() {
                       fontSize: "16px",
                     }}
                   >
-                    High-Quality Products
+                    Authentic Jerseys
                   </p>
                 </div>
 
@@ -169,7 +162,7 @@ export default function Home() {
                       lineHeight: "1.35em",
                     }}
                   >
-                    30,000+
+                    10,000+
                   </h3>
                   <p
                     className="text-base"
@@ -179,7 +172,7 @@ export default function Home() {
                       fontSize: "16px",
                     }}
                   >
-                    Happy Customers
+                    Happy Fans
                   </p>
                 </div>
               </div>
@@ -199,7 +192,7 @@ export default function Home() {
                         lineHeight: "1.35em",
                       }}
                     >
-                      200+
+                      100+
                     </h3>
                     <p
                       className="text-sm"
@@ -209,7 +202,7 @@ export default function Home() {
                         fontSize: "14px",
                       }}
                     >
-                      International Brands
+                      Football Clubs
                     </p>
                   </div>
 
@@ -225,7 +218,7 @@ export default function Home() {
                         lineHeight: "1.35em",
                       }}
                     >
-                      2,000+
+                      500+
                     </h3>
                     <p
                       className="text-sm"
@@ -235,7 +228,7 @@ export default function Home() {
                         fontSize: "14px",
                       }}
                     >
-                      High-Quality Products
+                      Authentic Jerseys
                     </p>
                   </div>
                 </div>
@@ -254,7 +247,7 @@ export default function Home() {
                         lineHeight: "1.35em",
                       }}
                     >
-                      30,000+
+                      10,000+
                     </h3>
                     <p
                       className="text-sm"
@@ -264,7 +257,7 @@ export default function Home() {
                         fontSize: "14px",
                       }}
                     >
-                      Happy Customers
+                      Happy Fans
                     </p>
                   </div>
                 </div>
@@ -301,17 +294,8 @@ export default function Home() {
       {/* New Arrivals Section */}
       <NewArrivals />
 
-      {/* Trending Now Section */}
-      <TrendingNow />
-
-      {/* Essentials Section */}
-      <Essentials />
-
       {/* Top Selling Section */}
       <TopSelling />
-
-      {/* Basics Section */}
-      <Basics />
 
       {/* Footer */}
       <Footer />

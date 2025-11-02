@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import ProductCard from './ProductCard';
+import React, { useState, useEffect } from "react";
+import ProductCard from "./ProductCard";
 
 // Type definitions for product data
 interface Product {
@@ -12,6 +12,7 @@ interface Product {
   discountPercentage?: number;
   rating: number;
   imageUrl: string;
+  hoverImageUrl?: string;
 }
 
 interface ProductsData {
@@ -22,22 +23,22 @@ interface ProductsData {
 // Function to fetch products from JSON file
 const fetchProducts = async (): Promise<ProductsData> => {
   try {
-    const response = await fetch('/products.json');
+    const response = await fetch("/products.json");
     if (!response.ok) {
-      throw new Error('Failed to fetch products');
+      throw new Error("Failed to fetch products");
     }
     const data = await response.json();
     // Only return the needed properties
     return {
       newArrivals: data.newArrivals || [],
-      topSelling: data.topSelling || []
+      topSelling: data.topSelling || [],
     };
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     // Return empty arrays as fallback
     return {
       newArrivals: [],
-      topSelling: []
+      topSelling: [],
     };
   }
 };
@@ -50,12 +51,12 @@ interface ProductGridProps {
   className?: string;
 }
 
-const ProductGrid: React.FC<ProductGridProps> = ({ 
-  title, 
+const ProductGrid: React.FC<ProductGridProps> = ({
+  title,
   subtitle,
   products,
   showViewAll = true,
-  className = ""
+  className = "",
 }) => {
   const [productData, setProductData] = useState<Product[]>(products || []);
   const [loading, setLoading] = useState<boolean>(!products);
@@ -66,9 +67,9 @@ const ProductGrid: React.FC<ProductGridProps> = ({
         setLoading(true);
         const data = await fetchProducts();
         // Determine which product set to use based on the title
-        if (title.toLowerCase().includes('new')) {
+        if (title.toLowerCase().includes("new")) {
           setProductData(data.newArrivals);
-        } else if (title.toLowerCase().includes('top')) {
+        } else if (title.toLowerCase().includes("top")) {
           setProductData(data.topSelling);
         } else {
           setProductData(data.newArrivals); // Default to newArrivals
@@ -97,43 +98,43 @@ const ProductGrid: React.FC<ProductGridProps> = ({
         {/* Header - True H&M Style */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 md:mb-8">
           <div className="mb-3 md:mb-0">
-            <h2 
+            <h2
               className="text-xl md:text-2xl font-bold mb-1"
-              style={{ 
-                fontFamily: 'Helvetica Neue, Arial, sans-serif',
+              style={{
+                fontFamily: "Helvetica Neue, Arial, sans-serif",
                 fontWeight: 700,
-                color: '#000000',
-                letterSpacing: '-0.02em'
+                color: "#000000",
+                letterSpacing: "-0.02em",
               }}
             >
               {title}
             </h2>
             {subtitle && (
-              <p 
+              <p
                 className="text-sm text-gray-600 mt-1"
-                style={{ 
-                  fontFamily: 'Helvetica Neue, Arial, sans-serif',
-                  fontWeight: 400
+                style={{
+                  fontFamily: "Helvetica Neue, Arial, sans-serif",
+                  fontWeight: 400,
                 }}
               >
                 {subtitle}
               </p>
             )}
           </div>
-          
+
           {showViewAll && (
-            <button 
+            <button
               className="px-4 py-2 border border-black text-sm font-medium transition-all duration-300 hover:bg-black hover:text-white"
-              style={{ 
-                fontFamily: 'Helvetica Neue, Arial, sans-serif',
-                fontWeight: 500
+              style={{
+                fontFamily: "Helvetica Neue, Arial, sans-serif",
+                fontWeight: 500,
               }}
             >
               View All
             </button>
           )}
         </div>
-        
+
         {/* Products Grid - True H&M Seamless Style */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-2">
           {productData.map((product) => (
@@ -146,17 +147,18 @@ const ProductGrid: React.FC<ProductGridProps> = ({
               discountPercentage={product.discountPercentage}
               rating={product.rating}
               imageUrl={product.imageUrl}
+              hoverImageUrl={product.hoverImageUrl}
             />
           ))}
         </div>
-        
+
         {/* Load More Button - H&M Style */}
         <div className="flex justify-center mt-8 md:mt-10">
-          <button 
+          <button
             className="px-6 py-2 bg-black text-white text-sm font-medium transition-all duration-300 hover:bg-gray-800"
-            style={{ 
-              fontFamily: 'Helvetica Neue, Arial, sans-serif',
-              fontWeight: 500
+            style={{
+              fontFamily: "Helvetica Neue, Arial, sans-serif",
+              fontWeight: 500,
             }}
           >
             Load more
@@ -170,17 +172,19 @@ const ProductGrid: React.FC<ProductGridProps> = ({
 export default ProductGrid;
 
 // Export pre-configured product grids for easy use
-export const NewArrivals: React.FC<{ className?: string }> = ({ className }) => (
-  <ProductGrid 
-    title="New arrivals" 
+export const NewArrivals: React.FC<{ className?: string }> = ({
+  className,
+}) => (
+  <ProductGrid
+    title="New arrivals"
     subtitle="Check out our latest collection"
     className={className}
   />
 );
 
 export const TopSelling: React.FC<{ className?: string }> = ({ className }) => (
-  <ProductGrid 
-    title="Top selling" 
+  <ProductGrid
+    title="Top selling"
     subtitle="Our most popular items right now"
     className={className}
   />
@@ -188,32 +192,34 @@ export const TopSelling: React.FC<{ className?: string }> = ({ className }) => (
 
 // New H&M-style sections
 export const Essentials: React.FC<{ className?: string }> = ({ className }) => (
-  <ProductGrid 
-    title="Essentials" 
+  <ProductGrid
+    title="Essentials"
     subtitle="Basic clothing for everyday comfort"
     className={className}
   />
 );
 
-export const TrendingNow: React.FC<{ className?: string }> = ({ className }) => (
-  <ProductGrid 
-    title="Trending now" 
+export const TrendingNow: React.FC<{ className?: string }> = ({
+  className,
+}) => (
+  <ProductGrid
+    title="Trending now"
     subtitle="The hottest items this season"
     className={className}
   />
 );
 
 export const Basics: React.FC<{ className?: string }> = ({ className }) => (
-  <ProductGrid 
-    title="Basics" 
+  <ProductGrid
+    title="Basics"
     subtitle="Simple and versatile pieces"
     className={className}
   />
 );
 
 export const Featured: React.FC<{ className?: string }> = ({ className }) => (
-  <ProductGrid 
-    title="Featured" 
+  <ProductGrid
+    title="Featured"
     subtitle="Handpicked favorites"
     className={className}
   />
