@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
   id: string;
@@ -25,8 +26,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
   hoverImageUrl,
   className = "",
 }) => {
+  const router = useRouter();
   const [isHovered, setIsHovered] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+
+  const handleClick = () => {
+    router.push(`/product/${id}`);
+  };
 
   // Generate star rating display
   const renderStars = (rating: number) => {
@@ -98,9 +104,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div
-      className={`group relative overflow-hidden ${className}`}
+      className={`group relative overflow-hidden cursor-pointer ${className}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
     >
       {/* Product Image Container */}
       <div className="relative w-full">
