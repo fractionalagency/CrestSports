@@ -2,77 +2,97 @@
   "newArrivals": [
     {
       "id": "1",
-      "name": "MANCHESTER UNITED HOME JERSEY 2024",
+      "name": "BARCELONA HOME 2025-26 PEDRI",
       "price": 89,
       "rating": 4.5,
-      "imageUrl": "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=295&h=398&fit=crop",
-      "hoverImageUrl": "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=295&h=398&fit=crop"
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/barca25.png",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/barca25_pedrib.png"
     },
     {
       "id": "2",
-      "name": "REAL MADRID AWAY JERSEY 2024",
+      "name": "MANCHESTER UNITED 07 BLACK RONALDO",
       "price": 95,
       "originalPrice": 110,
       "discountPercentage": 15,
       "rating": 4.8,
-      "imageUrl": "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=295&h=398&fit=crop",
-      "hoverImageUrl": "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=295&h=398&fit=crop"
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/ronaldo07black1.png",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/ronaldo07black2.png"
     },
     {
       "id": "3",
-      "name": "BARCELONA HOME JERSEY 2024",
+      "name": "REAL MADRID 2011 RONALDO",
       "price": 92,
       "originalPrice": 115,
       "discountPercentage": 20,
       "rating": 4.7,
-      "imageUrl": "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?w=295&h=398&fit=crop",
-      "hoverImageUrl": "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=295&h=398&fit=crop"
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/realMadrid11_1.jpeg",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/realMadrid11_3.jpeg"
     },
     {
       "id": "4",
-      "name": "LIVERPOOL THIRD JERSEY 2024",
+      "name": "MANCHESTER UNITED 98/99 BECKHAM",
       "price": 88,
       "originalPrice": 105,
       "discountPercentage": 16,
       "rating": 4.6,
-      "imageUrl": "https://images.unsplash.com/photo-1592656094267-764a45160876?w=295&h=398&fit=crop",
-      "hoverImageUrl": "https://images.unsplash.com/photo-1508667287040-8fbb0c22d365?w=295&h=398&fit=crop"
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/manutd_98.jpg",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/manutd_retro98-99.jpg"
     }
   ],
   "topSelling": [
     {
       "id": "5",
-      "name": "PARIS SAINT-GERMAIN HOME JERSEY 2024",
+      "name": "BARCELONA 09 HOME",
       "price": 99,
       "originalPrice": 120,
       "discountPercentage": 18,
       "rating": 5.0,
-      "imageUrl": "https://images.unsplash.com/photo-1555488205-6a1a0e41877b?w=295&h=398&fit=crop",
-      "hoverImageUrl": "https://images.unsplash.com/photo-1511886929837-354d827aae26?w=295&h=398&fit=crop"
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/barca09home.jpg",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/barca09messi.jpg"
     },
     {
       "id": "6",
-      "name": "CHELSEA AWAY JERSEY 2024",
+      "name": "MANCHESTER UNITED 2003-04 RONALDO",
       "price": 85,
       "rating": 4.4,
-      "imageUrl": "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=295&h=398&fit=crop",
-      "hoverImageUrl": "https://images.unsplash.com/photo-1605534811269-6d4e11362ff7?w=295&h=398&fit=crop"
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/manutd03.jpeg",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/manutd03ronaldo.jpeg"
     },
     {
       "id": "7",
-      "name": "ARSENAL HOME JERSEY 2024",
+      "name": "REAL MADRID 2017 PURPLE KIT RONALDO",
       "price": 87,
       "rating": 4.5,
-      "imageUrl": "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=295&h=398&fit=crop",
-      "hoverImageUrl": "https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?w=295&h=398&fit=crop"
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/madrid2017purple.jpg",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/madridpurple.jpg"
     },
     {
       "id": "8",
-      "name": "BAYERN MUNICH HOME JERSEY 2024",
+      "name": "PSG 2018 NEYMAR KIT",
       "price": 94,
       "rating": 4.9,
-      "imageUrl": "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=295&h=398&fit=crop",
-      "hoverImageUrl": "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=295&h=398&fit=crop"
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/psg18.jpg",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/psg18neymar.jpg"
+    },
+    {
+      "id": "9",
+      "name": "MANCHESTER CITY AWAY KIT 2025/26",
+      "price": 92,
+      "originalPrice": 110,
+      "discountPercentage": 15,
+      "rating": 4.6,
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/mancity25away.jpg",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/mancity25foden.jpg"
+    },
+    {
+      "id": "10",
+      "name": "BARCELONA 1999 RETRO RIVALDO",
+      "price": 88,
+      "originalPrice": 105,
+      "discountPercentage": 16,
+      "rating": 4.8,
+      "imageUrl": "https://nirvik30.github.io/jerseycatalog/barca99.jpg",
+      "hoverImageUrl": "https://nirvik30.github.io/jerseycatalog/barca99rivaldo.jpg"
     }
   ]
 }
