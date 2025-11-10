@@ -1,17 +1,7 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "apps/web/package.json",
-      "use": "@vercel/next"
-    },
-    {
-      "src": "apps/api/package.json",
-      "use": "@vercel/node"
-    }
-  ],
   "functions": {
-    "apps/api/pages/api/**/*.ts": {
+    "apps/api/app/**/*.{ts,js}": {
       "maxDuration": 30,
       "runtime": "nodejs18.x"
     }
