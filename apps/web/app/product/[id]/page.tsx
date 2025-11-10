@@ -48,9 +48,9 @@ export default function ProductDetailPage() {
     '1': {
       id: '1',
       name: 'BARCELONA HOME 2025-26 PEDRI',
-      price: 89,
-      originalPrice: 105,
-      discountPercentage: 15,
+      price: 350,
+      originalPrice: 450,
+      discountPercentage: 22,
       rating: 4.5,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca25.png',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/barca25_pedrib.png',
@@ -66,9 +66,9 @@ export default function ProductDetailPage() {
     '2': {
       id: '2', 
       name: 'MANCHESTER UNITED 07 BLACK RONALDO',
-      price: 95,
-      originalPrice: 110,
-      discountPercentage: 15,
+      price: 450,
+      originalPrice: 550,
+      discountPercentage: 18,
       rating: 4.8,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/ronaldo07black1.png',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/ronaldo07black2.png',
@@ -84,9 +84,9 @@ export default function ProductDetailPage() {
     '3': {
       id: '3',
       name: 'REAL MADRID 2011 RONALDO',
-      price: 92,
-      originalPrice: 115,
-      discountPercentage: 20,
+      price: 350,
+      originalPrice: 450,
+      discountPercentage: 22,
       rating: 4.7,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/realMadrid11_1.jpeg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/realMadrid11_3.jpeg',
@@ -102,9 +102,9 @@ export default function ProductDetailPage() {
     '4': {
       id: '4',
       name: 'MANCHESTER UNITED 98/99 BECKHAM',
-      price: 88,
-      originalPrice: 105,
-      discountPercentage: 16,
+      price: 350,
+      originalPrice: 450,
+      discountPercentage: 22,
       rating: 4.6,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd_98.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd_retro98-99.jpg',
@@ -120,8 +120,8 @@ export default function ProductDetailPage() {
     '5': {
       id: '5',
       name: 'BARCELONA 09 HOME',
-      price: 99,
-      originalPrice: 120,
+      price: 450,
+      originalPrice: 550,
       discountPercentage: 18,
       rating: 5.0,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca09home.jpg',
@@ -138,7 +138,7 @@ export default function ProductDetailPage() {
     '6': {
       id: '6',
       name: 'MANCHESTER UNITED 2003-04 RONALDO',
-      price: 85,
+      price: 350,
       rating: 4.4,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd03.jpeg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd03ronaldo.jpeg',
@@ -154,7 +154,7 @@ export default function ProductDetailPage() {
     '7': {
       id: '7',
       name: 'REAL MADRID 2017 PURPLE KIT RONALDO',
-      price: 87,
+      price: 350,
       rating: 4.5,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/madrid2017purple.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/madridpurple.jpg',
@@ -170,7 +170,7 @@ export default function ProductDetailPage() {
     '8': {
       id: '8',
       name: 'PSG 2018 NEYMAR KIT',
-      price: 94,
+      price: 450,
       rating: 4.9,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/psg18.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/psg18neymar.jpg',
@@ -186,9 +186,9 @@ export default function ProductDetailPage() {
     '9': {
       id: '9',
       name: 'MANCHESTER CITY AWAY KIT 2025/26',
-      price: 92,
-      originalPrice: 110,
-      discountPercentage: 15,
+      price: 350,
+      originalPrice: 450,
+      discountPercentage: 22,
       rating: 4.6,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/mancity25away.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/mancity25foden.jpg',
@@ -204,9 +204,9 @@ export default function ProductDetailPage() {
     '10': {
       id: '10',
       name: 'BARCELONA 1999 RETRO RIVALDO',
-      price: 88,
-      originalPrice: 105,
-      discountPercentage: 16,
+      price: 350,
+      originalPrice: 450,
+      discountPercentage: 22,
       rating: 4.8,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca99.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/barca99rivaldo.jpg',
@@ -225,9 +225,9 @@ export default function ProductDetailPage() {
     {
       id: '4',
       name: 'MANCHESTER UNITED 98/99 BECKHAM',
-      price: 88,
-      originalPrice: 105,
-      discountPercentage: 16,
+      price: 350,
+      originalPrice: 450,
+      discountPercentage: 22,
       rating: 4.6,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd_98.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd_retro98-99.jpg'
@@ -235,8 +235,8 @@ export default function ProductDetailPage() {
     {
       id: '5',
       name: 'BARCELONA 09 HOME',
-      price: 99,
-      originalPrice: 120,
+      price: 450,
+      originalPrice: 550,
       discountPercentage: 18,
       rating: 5.0,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca09home.jpg',
@@ -245,7 +245,7 @@ export default function ProductDetailPage() {
     {
       id: '6',
       name: 'MANCHESTER UNITED 2003-04 RONALDO',
-      price: 85,
+      price: 350,
       rating: 4.4,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd03.jpeg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd03ronaldo.jpeg'
@@ -253,7 +253,7 @@ export default function ProductDetailPage() {
     {
       id: '7',
       name: 'REAL MADRID 2017 PURPLE KIT RONALDO',
-      price: 87,
+      price: 350,
       rating: 4.5,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/madrid2017purple.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/madridpurple.jpg'
@@ -261,7 +261,7 @@ export default function ProductDetailPage() {
     {
       id: '8',
       name: 'PSG 2018 NEYMAR KIT',
-      price: 94,
+      price: 450,
       rating: 4.9,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/psg18.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/psg18neymar.jpg'
@@ -269,9 +269,9 @@ export default function ProductDetailPage() {
     {
       id: '9',
       name: 'MANCHESTER CITY AWAY KIT 2025/26',
-      price: 92,
-      originalPrice: 110,
-      discountPercentage: 15,
+      price: 350,
+      originalPrice: 450,
+      discountPercentage: 22,
       rating: 4.6,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/mancity25away.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/mancity25foden.jpg'
@@ -279,9 +279,9 @@ export default function ProductDetailPage() {
     {
       id: '10',
       name: 'BARCELONA 1999 RETRO RIVALDO',
-      price: 88,
-      originalPrice: 105,
-      discountPercentage: 16,
+      price: 350,
+      originalPrice: 450,
+      discountPercentage: 22,
       rating: 4.8,
       imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca99.jpg',
       hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/barca99rivaldo.jpg'
@@ -471,11 +471,11 @@ export default function ProductDetailPage() {
                 {/* Price */}
                 <div className="flex items-baseline gap-3 mb-6">
                   <span className="text-3xl font-bold text-gray-900">
-                    ${product.price}
+                    ₹{product.price}
                   </span>
                   {product.originalPrice && (
                     <span className="text-lg text-gray-500 line-through">
-                      ${product.originalPrice}
+                      ₹{product.originalPrice}
                     </span>
                   )}
                 </div>
@@ -659,10 +659,10 @@ export default function ProductDetailPage() {
                     {relatedProduct.name}
                   </h3>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="text-sm font-semibold">${relatedProduct.price}</span>
+                    <span className="text-sm font-semibold">₹{relatedProduct.price}</span>
                     {relatedProduct.originalPrice && (
                       <span className="text-sm text-gray-500 line-through">
-                        ${relatedProduct.originalPrice}
+                        ₹{relatedProduct.originalPrice}
                       </span>
                     )}
                   </div>
