@@ -2,9 +2,12 @@
 
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
+import { useCart } from "@/contexts/CartContext";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { cart } = useCart();
 
   return (
     <>
@@ -60,12 +63,14 @@ export default function Header() {
 
             {/* Cart Icon */}
             <div className="flex items-center space-x-4">
-              <button className="relative p-2 text-gray-900 hover:text-gray-600 transition-colors">
+              <Link href="/cart" className="relative p-2 text-gray-900 hover:text-gray-600 transition-colors">
                 <ShoppingCart className="h-6 w-6" />
-                <span className="absolute -top-1 -right-1 h-4 w-4 bg-black text-white text-xs rounded-full flex items-center justify-center">
-                  0
-                </span>
-              </button>
+                {cart.totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-black text-white text-xs rounded-full flex items-center justify-center">
+                    {cart.totalItems}
+                  </span>
+                )}
+              </Link>
 
               {/* Mobile Menu Button */}
               <button

@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useCart } from '@/contexts/CartContext';
 
 interface ProductDetail {
   id: string;
@@ -34,6 +35,7 @@ interface Product {
 export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
+  const { addToCart } = useCart();
   const productId = params.id as string;
   
   const [product, setProduct] = useState<ProductDetail | null>(null);
@@ -384,6 +386,21 @@ export default function ProductDetailPage() {
   };
 
   const handleAddToCart = () => {
+    if (!product) return;
+
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      discountPercentage: product.discountPercentage,
+      rating: product.rating,
+      imageUrl: product.imageUrl,
+      hoverImageUrl: product.hoverImageUrl,
+      size: selectedSize,
+    };
+
+    addToCart(cartItem, quantity);
     alert(`Added ${quantity} ${product.name} (Size: ${selectedSize}) to cart!`);
   };
 

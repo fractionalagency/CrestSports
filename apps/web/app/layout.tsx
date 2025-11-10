@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
+import { CartProvider } from "@/contexts/CartContext";
 
 const satoshi = localFont({
   src: "../fonts/satoshi/Satoshi-Bold.otf",
@@ -43,8 +44,10 @@ export default function RootLayout({
         className={`${satoshi.variable} ${satoshiMedium.variable} ${satoshiBold.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ fontFamily: 'Satoshi, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
       >
-        <Header />
-        <main>{children}</main>
+        <CartProvider>
+          <Header />
+          <main>{children}</main>
+        </CartProvider>
       </body>
     </html>
   );
