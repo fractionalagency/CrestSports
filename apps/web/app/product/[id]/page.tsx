@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/contexts/CartContext';
+import { api, type Product as ApiProduct } from '@/lib/api';
 
 interface ProductDetail {
   id: string;
@@ -32,6 +33,38 @@ interface Product {
   hoverImageUrl?: string;
 }
 
+// Function to convert API product to display product
+const convertApiProductToDetail = (apiProduct: ApiProduct): ProductDetail => {
+  const metadata = apiProduct.metadata as { rating?: number; discountPercentage?: number } || {};
+  return {
+    id: apiProduct.id,
+    name: apiProduct.name,
+    price: apiProduct.price,
+    originalPrice: apiProduct.salePrice || undefined,
+    discountPercentage: metadata.discountPercentage,
+    rating: metadata.rating || 0,
+    imageUrl: apiProduct.imageUrl || apiProduct.images[0] || "",
+    hoverImageUrl: apiProduct.images[1] || undefined,
+    description: apiProduct.description || "High-quality football jersey replica. Crafted from breathable fabric for optimal comfort and style.",
+    category: apiProduct.category?.name || "Football Jerseys",
+    allImages: apiProduct.images.length > 0 ? apiProduct.images : [apiProduct.imageUrl || ""],
+  };
+};
+
+const convertApiProductToCard = (apiProduct: ApiProduct): Product => {
+  const metadata = apiProduct.metadata as { rating?: number; discountPercentage?: number } || {};
+  return {
+    id: apiProduct.id,
+    name: apiProduct.name,
+    price: apiProduct.price,
+    originalPrice: apiProduct.salePrice || undefined,
+    discountPercentage: metadata.discountPercentage,
+    rating: metadata.rating || 0,
+    imageUrl: apiProduct.imageUrl || apiProduct.images[0] || "",
+    hoverImageUrl: apiProduct.images[1] || undefined,
+  };
+};
+
 export default function ProductDetailPage() {
   const params = useParams();
   const router = useRouter();
@@ -45,278 +78,113 @@ export default function ProductDetailPage() {
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
 
-  // Mock product data based on the products.json structure with all image URLs
-  const mockProductData: Record<string, ProductDetail> = {
-    '1': {
-      id: '1',
-      name: 'BARCELONA HOME 2025-26 PEDRI',
-      price: 350,
-      originalPrice: 450,
-      discountPercentage: 22,
-      rating: 4.5,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca25.png',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/barca25_pedrib.png',
-      description: 'This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/barca25.png',
-        'https://nirvik30.github.io/jerseycatalog/barca25_pedrib.png',
-        'https://nirvik30.github.io/jerseycatalog/barcahome.jpg',
-        'https://nirvik30.github.io/jerseycatalog/barcahomepedri.jpg',
-      ]
-    },
-    '2': {
-      id: '2', 
-      name: 'MANCHESTER UNITED 07 BLACK RONALDO',
-      price: 450,
-      originalPrice: 550,
-      discountPercentage: 18,
-      rating: 4.8,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/ronaldo07black1.png',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/ronaldo07black2.png',
-      description: 'Premium quality reproduction jersey featuring Cristiano Ronaldo. Made with breathable fabric for optimal performance.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/ronaldo07black1.png',
-        'https://nirvik30.github.io/jerseycatalog/ronaldo07black2.png',
-        'https://nirvik30.github.io/jerseycatalog/ronaldo07blackf1.jpg',
-        'https://nirvik30.github.io/jerseycatalog/ronaldo07blackf2.jpg',
-      ]
-    },
-    '3': {
-      id: '3',
-      name: 'REAL MADRID 2011 RONALDO',
-      price: 350,
-      originalPrice: 450,
-      discountPercentage: 22,
-      rating: 4.7,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/realMadrid11_1.jpeg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/realMadrid11_3.jpeg',
-      description: 'Classic Real Madrid design from the 2011 season. Authentic replica with premium materials and attention to detail.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/realMadrid11_1.jpeg',
-        'https://nirvik30.github.io/jerseycatalog/realMadrid11_3.jpeg',
-        'https://nirvik30.github.io/jerseycatalog/realhome11f.jpg',
-        'https://nirvik30.github.io/jerseycatalog/realhome11b.jpg',
-      ]
-    },
-    '4': {
-      id: '4',
-      name: 'MANCHESTER UNITED 98/99 BECKHAM',
-      price: 350,
-      originalPrice: 450,
-      discountPercentage: 22,
-      rating: 4.6,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd_98.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd_retro98-99.jpg',
-      description: 'Iconic Manchester United jersey from the treble-winning season. Authentic retro design with Beckham number 7.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/manutd_98.jpg',
-        'https://nirvik30.github.io/jerseycatalog/manutd_retro98-99.jpg',
-        'https://nirvik30.github.io/jerseycatalog/utd98.jpg',
-        'https://nirvik30.github.io/jerseycatalog/utd98beckham.jpg',
-      ]
-    },
-    '5': {
-      id: '5',
-      name: 'BARCELONA 09 HOME',
-      price: 450,
-      originalPrice: 550,
-      discountPercentage: 18,
-      rating: 5.0,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca09home.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/barca09messi.jpg',
-      description: 'Classic Barcelona home jersey from the 2009 season featuring Lionel Messi in his prime.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/barca09home.jpg',
-        'https://nirvik30.github.io/jerseycatalog/barca09messi.jpg',
-        'https://nirvik30.github.io/jerseycatalog/barca09f.jpg',
-        'https://nirvik30.github.io/jerseycatalog/barca09b.jpg',
-      ]
-    },
-    '6': {
-      id: '6',
-      name: 'MANCHESTER UNITED 2003-04 RONALDO',
-      price: 350,
-      rating: 4.4,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd03.jpeg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd03ronaldo.jpeg',
-      description: 'Manchester United jersey from Cristiano Ronaldo\'s breakthrough season at the club.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/manutd03.jpeg',
-        'https://nirvik30.github.io/jerseycatalog/manutd03ronaldo.jpeg',
-        'https://nirvik30.github.io/jerseycatalog/manutd03f.jpeg',
-        'https://nirvik30.github.io/jerseycatalog/manutd03b.jpeg',
-      ]
-    },
-    '7': {
-      id: '7',
-      name: 'REAL MADRID 2017 PURPLE KIT RONALDO',
-      price: 350,
-      rating: 4.5,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/madrid2017purple.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/madridpurple.jpg',
-      description: 'Stunning Real Madrid purple third kit from Cristiano Ronaldo\'s final season at the club.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/madrid2017purple.jpg',
-        'https://nirvik30.github.io/jerseycatalog/madridpurple.jpg',
-        'https://nirvik30.github.io/jerseycatalog/madridpurplef.jpg',
-        'https://nirvik30.github.io/jerseycatalog/madridpurpleb.jpg',
-      ]
-    },
-    '8': {
-      id: '8',
-      name: 'PSG 2018 NEYMAR KIT',
-      price: 450,
-      rating: 4.9,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/psg18.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/psg18neymar.jpg',
-      description: 'Paris Saint-Germain home kit featuring Neymar Jr during their dominant 2018 season.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/psg18.jpg',
-        'https://nirvik30.github.io/jerseycatalog/psg18neymar.jpg',
-        'https://nirvik30.github.io/jerseycatalog/psg18f.jpg',
-        'https://nirvik30.github.io/jerseycatalog/psg18b.jpg',
-      ]
-    },
-    '9': {
-      id: '9',
-      name: 'MANCHESTER CITY AWAY KIT 2025/26',
-      price: 350,
-      originalPrice: 450,
-      discountPercentage: 22,
-      rating: 4.6,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/mancity25away.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/mancity25foden.jpg',
-      description: 'Modern Manchester City away kit for the 2025/26 season featuring Phil Foden.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/mancity25away.jpg',
-        'https://nirvik30.github.io/jerseycatalog/mancity25foden.jpg',
-        'https://nirvik30.github.io/jerseycatalog/mancity25awayf.jpg',
-        'https://nirvik30.github.io/jerseycatalog/mancity25awayb.jpg',
-      ]
-    },
-    '10': {
-      id: '10',
-      name: 'BARCELONA 1999 RETRO RIVALDO',
-      price: 350,
-      originalPrice: 450,
-      discountPercentage: 22,
-      rating: 4.8,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca99.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/barca99rivaldo.jpg',
-      description: 'Nostalgic Barcelona home jersey from 1999 featuring Brazilian legend Rivaldo.',
-      category: 'Football Jerseys',
-      allImages: [
-        'https://nirvik30.github.io/jerseycatalog/barca99.jpg',
-        'https://nirvik30.github.io/jerseycatalog/barca99rivaldo.jpg',
-        'https://nirvik30.github.io/jerseycatalog/barca99f.jpg',
-        'https://nirvik30.github.io/jerseycatalog/barca99b.jpg',
-      ]
-    }
-  };
-
-  const mockRelatedProducts: Product[] = [
-    {
-      id: '4',
-      name: 'MANCHESTER UNITED 98/99 BECKHAM',
-      price: 350,
-      originalPrice: 450,
-      discountPercentage: 22,
-      rating: 4.6,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd_98.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd_retro98-99.jpg'
-    },
-    {
-      id: '5',
-      name: 'BARCELONA 09 HOME',
-      price: 450,
-      originalPrice: 550,
-      discountPercentage: 18,
-      rating: 5.0,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca09home.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/barca09messi.jpg'
-    },
-    {
-      id: '6',
-      name: 'MANCHESTER UNITED 2003-04 RONALDO',
-      price: 350,
-      rating: 4.4,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd03.jpeg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/manutd03ronaldo.jpeg'
-    },
-    {
-      id: '7',
-      name: 'REAL MADRID 2017 PURPLE KIT RONALDO',
-      price: 350,
-      rating: 4.5,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/madrid2017purple.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/madridpurple.jpg'
-    },
-    {
-      id: '8',
-      name: 'PSG 2018 NEYMAR KIT',
-      price: 450,
-      rating: 4.9,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/psg18.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/psg18neymar.jpg'
-    },
-    {
-      id: '9',
-      name: 'MANCHESTER CITY AWAY KIT 2025/26',
-      price: 350,
-      originalPrice: 450,
-      discountPercentage: 22,
-      rating: 4.6,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/mancity25away.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/mancity25foden.jpg'
-    },
-    {
-      id: '10',
-      name: 'BARCELONA 1999 RETRO RIVALDO',
-      price: 350,
-      originalPrice: 450,
-      discountPercentage: 22,
-      rating: 4.8,
-      imageUrl: 'https://nirvik30.github.io/jerseycatalog/barca99.jpg',
-      hoverImageUrl: 'https://nirvik30.github.io/jerseycatalog/barca99rivaldo.jpg'
-    }
-  ];
-
+  // Fetch product data from API
   useEffect(() => {
-    const loadProduct = async () => {
+    const fetchProduct = async () => {
       try {
-        // In a real app, this would fetch from an API
-        const foundProduct = mockProductData[productId];
+        setLoading(true);
+        const response = await api.getProductById(productId);
         
-        if (foundProduct) {
-          setProduct(foundProduct);
-          // Filter out the current product from related products
-          const filteredRelated = mockRelatedProducts.filter(p => p.id !== productId);
-          setRelatedProducts(filteredRelated.slice(0, 4)); // Show only 4 related products
+        if (response.success && response.data) {
+          setProduct(convertApiProductToDetail(response.data));
         } else {
-          // Product not found, redirect to home
+          console.error('Product not found');
           router.push('/');
         }
       } catch (error) {
-        console.error('Error loading product:', error);
+        console.error('Error fetching product:', error);
         router.push('/');
       } finally {
         setLoading(false);
       }
     };
 
-    if (productId) {
-      loadProduct();
-    }
+    const fetchRelatedProducts = async () => {
+      try {
+        const response = await api.getProducts({ isActive: true, limit: 4 });
+        if (response.success && response.data) {
+          const filtered = response.data
+            .filter(p => p.id !== productId)
+            .slice(0, 4);
+          setRelatedProducts(filtered.map(convertApiProductToCard));
+        }
+      } catch (error) {
+        console.error('Error fetching related products:', error);
+      }
+    };
+
+    fetchProduct();
+    fetchRelatedProducts();
   }, [productId, router]);
+
+  // Old mock data removed - now using API
+
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-20">
+        <div className="flex items-center justify-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="container mx-auto px-4 py-20">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
+          <button 
+            onClick={() => router.push('/')}
+            className="px-6 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors"
+          >
+            Return to Home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  const productImages = product.allImages || [
+    product.imageUrl,
+    product.hoverImageUrl || product.imageUrl,
+  ];
+
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    const stars = [];
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <svg key={`full-${i}`} width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 1.5L12.5 7.5L19 8.5L14 13L15.5 19.5L10 16.5L4.5 19.5L6 13L1 8.5L7.5 7.5L10 1.5Z" fill="#000000"/>
+        </svg>
+      );
+    }
+
+    if (hasHalfStar) {
+      stars.push(
+        <svg key="half" width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 1.5L12.5 7.5L19 8.5L14 13L15.5 19.5L10 16.5V1.5Z" fill="#000000"/>
+          <path d="M10 1.5L7.5 7.5L1 8.5L6 13L4.5 19.5L10 16.5V1.5Z" fill="#E5E5E5"/>
+        </svg>
+      );
+    }
+
+    const emptyStars = 5 - Math.ceil(rating);
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(
+        <svg key={`empty-${i}`} width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 1.5L12.5 7.5L19 8.5L14 13L15.5 19.5L10 16.5L4.5 19.5L6 13L1 8.5L7.5 7.5L10 1.5Z" fill="#E5E5E5"/>
+        </svg>
+      );
+    }
+
+    return stars;
+  };
+
+
 
   if (loading) {
     return (

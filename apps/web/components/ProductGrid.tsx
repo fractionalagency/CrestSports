@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
+import { api, type Product as ApiProduct } from "@/lib/api";
 
 // Type definitions for product data
 interface Product {
@@ -15,31 +16,36 @@ interface Product {
   hoverImageUrl?: string;
 }
 
-interface ProductsData {
-  newArrivals: Product[];
-  topSelling: Product[];
-}
+// Function to convert API product to display product
+const convertApiProduct = (apiProduct: ApiProduct): Product => {
+  const metadata = apiProduct.metadata as { rating?: number; discountPercentage?: number } || {};
+  return {
+    id: apiProduct.id,
+    name: apiProduct.name,
+    price: apiProduct.price,
+    originalPrice: apiProduct.salePrice || undefined,
+    discountPercentage: metadata.discountPercentage,
+    rating: metadata.rating || 0,
+    imageUrl: apiProduct.imageUrl || apiProduct.images[0] || "",
+    hoverImageUrl: apiProduct.images[1] || undefined,
+  };
+};
 
-// Function to fetch products from JSON file
-const fetchProducts = async (): Promise<ProductsData> => {
+// Function to fetch products from API
+const fetchProducts = async (isFeatured?: boolean): Promise<Product[]> => {
   try {
-    const response = await fetch("/products.json");
-    if (!response.ok) {
+    const response = isFeatured 
+      ? await api.getFeaturedProducts()
+      : await api.getProducts({ isActive: true, limit: 10 });
+    
+    if (!response.success || !response.data) {
       throw new Error("Failed to fetch products");
     }
-    const data = await response.json();
-    // Only return the needed properties
-    return {
-      newArrivals: data.newArrivals || [],
-      topSelling: data.topSelling || [],
-    };
+    
+    return response.data.map(convertApiProduct);
   } catch (error) {
     console.error("Error fetching products:", error);
-    // Return empty arrays as fallback
-    return {
-      newArrivals: [],
-      topSelling: [],
-    };
+    return [];
   }
 };
 
@@ -65,15 +71,10 @@ const ProductGrid: React.FC<ProductGridProps> = ({
     if (!products) {
       const loadProducts = async () => {
         setLoading(true);
-        const data = await fetchProducts();
-        // Determine which product set to use based on the title
-        if (title.toLowerCase().includes("new")) {
-          setProductData(data.newArrivals);
-        } else if (title.toLowerCase().includes("top")) {
-          setProductData(data.topSelling);
-        } else {
-          setProductData(data.newArrivals); // Default to newArrivals
-        }
+        // Determine which products to fetch based on the title
+        const isFeatured = title.toLowerCase().includes("new");
+        const data = await fetchProducts(isFeatured);
+        setProductData(data);
         setLoading(false);
       };
 
