@@ -41,8 +41,23 @@ async function createAdmin() {
     });
 
     if (existingAdmin) {
-      console.error(`❌ Admin with email ${email} already exists`);
-      process.exit(1);
+      console.log(`\n⚠️  Admin with email ${email} already exists.`);
+      const updatePassword = await question('Do you want to update the password? (y/N): ');
+      if (updatePassword.toLowerCase() === 'y' || updatePassword.toLowerCase() === 'yes') {
+        // Hash new password
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await prisma.admin.update({
+          where: { id: existingAdmin.id },
+          data: { password: hashedPassword },
+        });
+        console.log('✅ Admin password updated successfully!');
+        console.log(`📧 Email: ${email}`);
+        console.log(`👤 Name: ${existingAdmin.name}`);
+        console.log(`🔒 Password: ${password}`);
+      } else {
+        console.log('❌ Admin creation cancelled.');
+      }
+      process.exit(0);
     }
 
     // Hash password

@@ -95,4 +95,23 @@ router.post(
   }
 );
 
+router.get(
+  '/analytics/overview',
+  authenticateAdmin,
+  async (_req: Request, res: Response): Promise<Response> => {
+    const analytics = await adminService.getAnalyticsOverview();
+    return sendSuccess(res, analytics);
+  }
+);
+
+router.get(
+  '/analytics/sales',
+  authenticateAdmin,
+  async (req: Request, res: Response): Promise<Response> => {
+    const days = parseInt(req.query.days as string) || 30;
+    const salesData = await adminService.getSalesAnalytics(days);
+    return sendSuccess(res, salesData);
+  }
+);
+
 export default router;

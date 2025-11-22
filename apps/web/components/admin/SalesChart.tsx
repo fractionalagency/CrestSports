@@ -35,9 +35,9 @@ export function SalesChart() {
                 });
 
                 if (response.ok) {
-                    const salesData = await response.json();
+                    const data = await response.json();
                     // Format dates for display
-                    const formattedData = salesData.map((item: any) => ({
+                    const formattedData = data.data.map((item: any) => ({
                         ...item,
                         date: new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
                     }));

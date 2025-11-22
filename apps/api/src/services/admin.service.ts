@@ -239,6 +239,91 @@ export class AdminService {
   }
 
   /**
+   * Get dashboard analytics overview
+   */
+  async getAnalyticsOverview() {
+    // Get total orders
+    const totalOrders = await prisma.order.count();
+
+    // Get total revenue
+    const revenueResult = await prisma.order.aggregate({
+      _sum: {
+        total: true,
+      },
+      where: {
+        status: {
+          in: ['PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED'],
+        },
+      },
+    });
+    const totalRevenue = revenueResult._sum.total || 0;
+
+    // Get total products
+    const totalProducts = await prisma.product.count();
+
+    // Get active products (assuming isActive field exists, or just count all)
+    const activeProducts = await prisma.product.count({
+      where: {
+        isActive: true,
+      },
+    });
+
+    // Get pending orders
+    const pendingOrders = await prisma.order.count({
+      where: {
+        status: 'PENDING',
+      },
+    });
+
+    // Get recent orders
+    const recentOrders = await prisma.order.findMany({
+      take: 5,
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        items: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
+
+    return {
+      totalOrders,
+      totalRevenue: Number(totalRevenue),
+      totalProducts,
+      activeProducts,
+      pendingOrders,
+      recentOrders,
+    };
+  }
+
+  /**
+   * Get sales analytics data
+   */
+  async getSalesAnalytics(days: number = 30) {
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days);
+
+    // Get daily sales data
+    const salesData = await prisma.$queryRaw`
+      SELECT
+        DATE(created_at) as date,
+        SUM(total) as revenue,
+        COUNT(*) as orders
+      FROM orders
+      WHERE created_at >= ${startDate}
+        AND status IN ('PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED')
+      GROUP BY DATE(created_at)
+      ORDER BY DATE(created_at)
+    `;
+
+    return salesData;
+  }
+
+  /**
    * Generate JWT token
    */
   private generateToken(payload: JwtPayload): string {

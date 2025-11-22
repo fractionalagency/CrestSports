@@ -46,7 +46,7 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
 
             if (response.ok) {
                 const data = await response.json();
-                setAdmin(data);
+                setAdmin(data.data);
             } else {
                 // Token is invalid, clear it
                 localStorage.removeItem('admin_token');
@@ -77,9 +77,9 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         const data = await response.json();
-        setToken(data.token);
-        setAdmin(data.admin);
-        localStorage.setItem('admin_token', data.token);
+        setToken(data.data.token);
+        setAdmin(data.data.admin);
+        localStorage.setItem('admin_token', data.data.token);
     };
 
     const logout = () => {

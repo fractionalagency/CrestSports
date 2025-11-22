@@ -37,7 +37,7 @@ export default function AdminDashboardPage() {
 
             if (response.ok) {
                 const data = await response.json();
-                setAnalytics(data);
+                setAnalytics(data.data);
             }
         } catch (error) {
             console.error('Failed to fetch analytics:', error);
