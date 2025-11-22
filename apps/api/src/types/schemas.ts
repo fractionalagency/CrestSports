@@ -83,9 +83,46 @@ export const verifyPaymentSchema = z.object({
   razorpaySignature: z.string(),
 });
 
+// Admin authentication schemas
+export const adminLoginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
+
+export const adminRegisterSchema = z.object({
+  email: z.string().email(),
+  name: z.string().min(2).max(100),
+  password: z.string().min(8).max(100),
+  role: z.enum(['ADMIN', 'MANAGER', 'STAFF']).default('STAFF'),
+});
+
+export const updateAdminSchema = z.object({
+  name: z.string().min(2).max(100).optional(),
+  role: z.enum(['ADMIN', 'MANAGER', 'STAFF']).optional(),
+  isActive: z.boolean().optional(),
+});
+
+export const updateOrderStatusSchema = z.object({
+  status: z.enum(['PENDING', 'PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED']),
+  trackingNumber: z.string().optional(),
+  notes: z.string().optional(),
+});
+
+// Admin analytics schemas
+export const analyticsDateRangeSchema = z.object({
+  startDate: z.string().datetime().optional(),
+  endDate: z.string().datetime().optional(),
+  period: z.enum(['today', 'week', 'month', 'year', 'all']).default('month'),
+});
+
 export type PaginationQuery = z.infer<typeof paginationSchema>;
 export type ProductListQuery = z.infer<typeof productListSchema>;
 export type CreateProductDto = z.infer<typeof createProductSchema>;
 export type UpdateProductDto = z.infer<typeof updateProductSchema>;
 export type CreateOrderDto = z.infer<typeof createOrderSchema>;
 export type VerifyPaymentDto = z.infer<typeof verifyPaymentSchema>;
+export type AdminLoginDto = z.infer<typeof adminLoginSchema>;
+export type AdminRegisterDto = z.infer<typeof adminRegisterSchema>;
+export type UpdateAdminDto = z.infer<typeof updateAdminSchema>;
+export type UpdateOrderStatusDto = z.infer<typeof updateOrderStatusSchema>;
+export type AnalyticsDateRangeQuery = z.infer<typeof analyticsDateRangeSchema>;
