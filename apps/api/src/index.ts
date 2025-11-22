@@ -66,7 +66,7 @@ app.use(`${apiPrefix}/health`, healthRouter);
 app.use(`${apiPrefix}/products`, productRouter);
 app.use(`${apiPrefix}/orders`, orderRouter);
 app.use(`${apiPrefix}/payments`, paymentRouter);
-app.use(`${apiPrefix}/admin`, adminRouter);
+app.use(`${apiPrefix}/admin/auth`, adminRouter);
 
 // ============================================
 // ERROR HANDLING

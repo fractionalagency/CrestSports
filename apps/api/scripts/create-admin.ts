@@ -2,7 +2,9 @@ import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
 import * as readline from 'readline';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  datasourceUrl: process.env.DIRECT_URL,
+});
 
 const rl = readline.createInterface({
   input: process.stdin,
