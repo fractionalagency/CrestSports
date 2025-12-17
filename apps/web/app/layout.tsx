@@ -1,54 +1,30 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { HeaderWrapper } from "@/components/HeaderWrapper";
-import { CartProvider } from "@/contexts/CartContext";
+import { Geist, Geist_Mono } from "next/font/google"
 
-const satoshi = localFont({
-  src: "../fonts/satoshi/Satoshi-Bold.otf",
-  variable: "--font-satoshi",
-  weight: "700",
-});
-const satoshiMedium = localFont({
-  src: "../fonts/satoshi/Satoshi-Bold.otf",
-  variable: "--font-satoshi-medium",
-  weight: "700",
-});
-const satoshiBold = localFont({
-  src: "../fonts/satoshi/Satoshi-Black.otf",
-  variable: "--font-satoshi-bold",
-  weight: "900",
-});
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-});
+import "@workspace/ui/globals.css"
+import { Providers } from "@/components/providers"
 
-export const metadata: Metadata = {
-  title: "CrestSports - Premium Sports Gear",
-  description: "Your destination for premium sports equipment and apparel",
-};
+const fontSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
+
+const fontMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+})
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${satoshi.variable} ${satoshiMedium.variable} ${satoshiBold.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{ fontFamily: 'Satoshi, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
+        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
       >
-        <CartProvider>
-          <HeaderWrapper />
-          <main>{children}</main>
-        </CartProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
-  );
+  )
 }
