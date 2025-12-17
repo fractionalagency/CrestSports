@@ -18,7 +18,9 @@ interface Product {
 
 // Function to convert API product to display product
 const convertApiProduct = (apiProduct: ApiProduct): Product => {
-  const metadata = apiProduct.metadata as { rating?: number; discountPercentage?: number } || {};
+  const metadata =
+    (apiProduct.metadata as { rating?: number; discountPercentage?: number }) ||
+    {};
   return {
     id: apiProduct.id,
     name: apiProduct.name,
@@ -34,14 +36,14 @@ const convertApiProduct = (apiProduct: ApiProduct): Product => {
 // Function to fetch products from API
 const fetchProducts = async (isFeatured?: boolean): Promise<Product[]> => {
   try {
-    const response = isFeatured 
+    const response = isFeatured
       ? await api.getFeaturedProducts()
       : await api.getProducts({ isActive: true, limit: 10 });
-    
+
     if (!response.success || !response.data) {
       throw new Error("Failed to fetch products");
     }
-    
+
     return response.data.map(convertApiProduct);
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -94,7 +96,10 @@ const ProductGrid: React.FC<ProductGridProps> = ({
     );
   }
   return (
-    <section className={`py-6 md:py-10 ${className}`}>
+    <section
+      className={`py-6 md:py-10 ${className}`}
+      style={{ backgroundColor: "white" }}
+    >
       <div className="max-w-7xl mx-auto px-2 md:px-4">
         {/* Header - True H&M Style */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 md:mb-8">
