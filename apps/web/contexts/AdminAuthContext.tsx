@@ -25,67 +25,40 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Check for existing token on mount
-        const storedToken = localStorage.getItem('admin_token');
-        if (storedToken) {
-            setToken(storedToken);
-            fetchCurrentAdmin(storedToken);
-        } else {
-            setIsLoading(false);
+        // Check for existing admin data on mount
+        const storedAdmin = localStorage.getItem('admin_data');
+        if (storedAdmin) {
+            const data = JSON.parse(storedAdmin);
+            setAdmin(data.admin);
+            setToken(data.token);
         }
+        setIsLoading(false);
     }, []);
 
-    const fetchCurrentAdmin = async (authToken: string) => {
-        try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
-            const response = await fetch(`${apiUrl}/api/v1/admin/auth/me`, {
-                headers: {
-                    Authorization: `Bearer ${authToken}`,
-                },
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setAdmin(data.data);
-            } else {
-                // Token is invalid, clear it
-                localStorage.removeItem('admin_token');
-                setToken(null);
-            }
-        } catch (error) {
-            console.error('Failed to fetch admin:', error);
-            localStorage.removeItem('admin_token');
-            setToken(null);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
     const login = async (email: string, password: string) => {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
-        const response = await fetch(`${apiUrl}/api/v1/admin/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        });
-
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Login failed');
+        // Simple login simulation - accept any email and password
+        // In a real app, this would validate against a backend
+        if (email && password) {
+            const mockAdmin: Admin = {
+                id: '1',
+                email,
+                name: email.split('@')[0],
+                role: 'ADMIN'
+            };
+            const mockToken = 'mock_admin_token_' + Date.now();
+            
+            setAdmin(mockAdmin);
+            setToken(mockToken);
+            localStorage.setItem('admin_data', JSON.stringify({ admin: mockAdmin, token: mockToken }));
+        } else {
+            throw new Error('Please provide email and password');
         }
-
-        const data = await response.json();
-        setToken(data.data.token);
-        setAdmin(data.data.admin);
-        localStorage.setItem('admin_token', data.data.token);
     };
 
     const logout = () => {
         setAdmin(null);
         setToken(null);
-        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_data');
     };
 
     return (

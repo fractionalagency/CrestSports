@@ -149,30 +149,6 @@ model OrderItem {
 }
 
 // ============================================
-// ADMIN / USER MANAGEMENT (Optional for future)
-// ============================================
-
-enum UserRole {
-  ADMIN
-  MANAGER
-  STAFF
-}
-
-model Admin {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String
-  password  String
-  role      UserRole @default(STAFF)
-  isActive  Boolean  @default(true)
-  lastLogin DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("admins")
-}
-
-// ============================================
 // EMAIL TRACKING
 // ============================================
 

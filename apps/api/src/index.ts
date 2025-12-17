@@ -15,7 +15,6 @@ import healthRouter from '@routes/health.routes';
 import productRouter from '@routes/product.routes';
 import orderRouter from '@routes/order.routes';
 import paymentRouter from '@routes/payment.routes';
-import adminRouter from '@routes/admin.routes';
 
 const app: Application = express();
 
@@ -66,7 +65,6 @@ app.use(`${apiPrefix}/health`, healthRouter);
 app.use(`${apiPrefix}/products`, productRouter);
 app.use(`${apiPrefix}/orders`, orderRouter);
 app.use(`${apiPrefix}/payments`, paymentRouter);
-app.use(`${apiPrefix}/admin/auth`, adminRouter);
 
 // ============================================
 // ERROR HANDLING

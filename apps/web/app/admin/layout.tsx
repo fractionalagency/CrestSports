@@ -3,8 +3,6 @@
 import { useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { AdminAuthProvider, useAdminAuth } from '@/contexts/AdminAuthContext';
-import { AdminSidebar } from '@/components/admin/AdminSidebar';
-import { AdminHeader } from '@/components/admin/AdminHeader';
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
     const router = useRouter();
@@ -41,13 +39,9 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
 
     return (
         <div className="min-h-screen bg-slate-950">
-            <AdminSidebar />
-            <div className="lg:pl-64">
-                <AdminHeader />
-                <main className="p-6">
-                    {children}
-                </main>
-            </div>
+            <main className="p-6">
+                {children}
+            </main>
         </div>
     );
 }
