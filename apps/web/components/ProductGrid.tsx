@@ -185,6 +185,7 @@ export const NewArrivals: React.FC<{ className?: string }> = ({
     title="New arrivals"
     subtitle="Check out our latest collection"
     className={className}
+    showViewAll={false}
   />
 );
 
@@ -193,6 +194,7 @@ export const TopSelling: React.FC<{ className?: string }> = ({ className }) => (
     title="Top selling"
     subtitle="Our most popular items right now"
     className={className}
+    showViewAll={false}
   />
 );
 
