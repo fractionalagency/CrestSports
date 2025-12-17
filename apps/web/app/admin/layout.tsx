@@ -23,10 +23,10 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
     // Show loading state
     if (isLoading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-slate-950">
+            <div className="min-h-screen flex items-center justify-center bg-white">
                 <div className="flex flex-col items-center gap-4">
-                    <div className="h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                    <p className="text-slate-400">Loading...</p>
+                    <div className="h-12 w-12 border-4 border-black border-t-transparent rounded-full animate-spin"></div>
+                    <p className="text-black">Loading...</p>
                 </div>
             </div>
         );
@@ -38,8 +38,8 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <div className="min-h-screen bg-slate-950">
-            <main className="p-6">
+        <div className="min-h-screen bg-white">
+            <main>
                 {children}
             </main>
         </div>
