@@ -1,301 +1,126 @@
 "use client";
 
+import { Parisienne, Playfair_Display } from "next/font/google";
+
 import { NewArrivals, TopSelling } from "@/components/ProductGrid";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+const parisienne = Parisienne({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section
-        className="relative md:bg-black"
-        style={{ backgroundColor: "#F4F2F3" }}
-      >
-        {/* Desktop: Hero Background Image */}
-        <div className="hidden md:absolute md:inset-0 md:block">
-          <img
-            src="/hero-bg.png"
-            alt="Hero background"
-            className="w-full h-full object-cover"
-            style={{ opacity: 0.9 }}
-          />
-        </div>
+    <div className="min-h-screen bg-[#f9f7f4] text-neutral-900">
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-[#f9f7f4] to-[#f1ede8]" />
+        <div className="absolute top-12 right-8 h-36 w-36 rounded-full bg-white/60 blur-3xl" />
+        <div className="absolute -bottom-20 -left-8 h-52 w-52 rounded-full bg-[#eae2d8]/70 blur-3xl" />
 
-        {/* SVG Shapes - Desktop Only */}
-        <div className="hidden md:absolute md:inset-0 md:pointer-events-none md:block">
-          {/* Large Vector - Top Right */}
-          <img
-            src="/vector-1.svg"
-            alt="Decorative vector"
-            className="absolute"
-            style={{
-              right: "85px",
-              top: "220px",
-              width: "104px",
-              height: "104px",
-            }}
-          />
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10 py-16 md:py-24 grid md:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
+          <div className="space-y-7 max-w-2xl">
+            <div className="space-y-2">
+              <p className="tracking-[0.22em] text-[11px] uppercase text-neutral-500">
+                Crest Atelier
+              </p>
+              <div className="flex items-center gap-3">
+                <span
+                  className={`${parisienne.className} text-[18px] text-neutral-500`}
+                >
+                  Noir Edit
+                </span>
+                <span className="h-px w-12 bg-neutral-300" />
+              </div>
+              <h1
+                className={`${playfair.className} text-[40px] md:text-[52px] leading-[1.05] text-neutral-900`}
+              >
+                Minimal football couture.
+              </h1>
+            </div>
 
-          {/* Small Vector - Corrected positioning (more left and up) */}
-          <img
-            src="/vector-2.svg"
-            alt="Decorative vector"
-            className="absolute"
-            style={{
-              right: "750px",
-              top: "231px",
-              width: "56px",
-              height: "56px",
-            }}
-          />
-        </div>
-
-        {/* Content Overlay */}
-        <div className="relative z-10 container mx-auto px-4 py-20 md:py-32">
-          <div className="max-w-2xl">
-            {/* Main Heading */}
-            <h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
-              style={{
-                fontFamily: "Montserrat",
-                fontWeight: 900,
-                textTransform: "uppercase",
-                color: "#000000",
-              }}
-            >
-              WEAR YOUR TEAM WITH PRIDE
-            </h1>
-
-            {/* Description */}
-            <p
-              className="text-lg md:text-xl mb-8 leading-relaxed max-w-lg"
-              style={{
-                color: "rgba(0, 0, 0, 0.6)",
-                fontFamily: "Satoshi",
-              }}
-            >
-              Discover authentic football jerseys from top clubs and national teams.
-              Premium quality, official designs, and fast delivery.
+            <p className="text-base md:text-lg text-neutral-700 leading-relaxed">
+              Monochrome kits with quiet luxury details and precise tailoring.
             </p>
 
-            {/* Stats Section - Different layouts for desktop and mobile */}
-            <div className="mb-8">
-              {/* Desktop Layout */}
-              <div className="hidden md:flex md:flex-row md:items-center md:gap-8">
-                {/* 200+ International Brands */}
-                <div className="flex flex-col">
-                  <h3
-                    className="text-4xl font-bold mb-1"
-                    style={{
-                      fontFamily: "Montserrat",
-                      fontWeight: 700,
-                      color: "#000000",
-                      fontSize: "40px",
-                      lineHeight: "1.35em",
-                    }}
-                  >
-                    100+
-                  </h3>
-                  <p
-                    className="text-base"
-                    style={{
-                      fontFamily: "Satoshi",
-                      color: "rgba(0, 0, 0, 0.6)",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Football Clubs
-                  </p>
-                </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <button className="rounded-full bg-neutral-900 text-white px-7 py-3 text-[11px] font-semibold tracking-[0.18em] uppercase transition-colors duration-200 hover:bg-neutral-800">
+                Shop collection
+              </button>
+              <button className="rounded-full border border-neutral-300 px-7 py-3 text-[11px] font-semibold tracking-[0.14em] uppercase text-neutral-900 transition-colors duration-200 hover:border-neutral-900">
+                Lookbook
+              </button>
+            </div>
 
-                {/* Divider Line */}
-                <div
-                  className="w-px h-12"
-                  style={{
-                    backgroundColor: "rgba(0, 0, 0, 0.2)",
-                  }}
-                ></div>
+            <div className="flex flex-wrap items-center gap-4 text-sm text-neutral-600">
+              {["100+ clubs", "500+ authentic drops", "Limited runs"].map(
+                (item) => (
+                  <div key={item} className="flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-neutral-900" />
+                    <span>{item}</span>
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
 
-                {/* 2,000+ High-Quality Products */}
-                <div className="flex flex-col">
-                  <h3
-                    className="text-4xl font-bold mb-1"
-                    style={{
-                      fontFamily: "Montserrat",
-                      fontWeight: 700,
-                      color: "#000000",
-                      fontSize: "40px",
-                      lineHeight: "1.35em",
-                    }}
-                  >
-                    500+
-                  </h3>
-                  <p
-                    className="text-base"
-                    style={{
-                      fontFamily: "Satoshi",
-                      color: "rgba(0, 0, 0, 0.6)",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Authentic Jerseys
-                  </p>
-                </div>
+          <div className="relative w-full max-w-md ml-auto">
+            <div className="absolute -left-6 -top-6 h-20 w-20 rounded-full bg-white/60 blur-2xl" />
+            <div className="absolute -right-8 top-6 h-20 w-20 rounded-full bg-[#e6ddd4]/80 blur-2xl" />
 
-                {/* Divider Line */}
-                <div
-                  className="w-px h-12"
-                  style={{
-                    backgroundColor: "rgba(0, 0, 0, 0.2)",
-                  }}
-                ></div>
-
-                {/* 30,000+ Happy Customers */}
-                <div className="flex flex-col">
-                  <h3
-                    className="text-4xl font-bold mb-1"
-                    style={{
-                      fontFamily: "Montserrat",
-                      fontWeight: 700,
-                      color: "#000000",
-                      fontSize: "40px",
-                      lineHeight: "1.35em",
-                    }}
-                  >
-                    10,000+
-                  </h3>
-                  <p
-                    className="text-base"
-                    style={{
-                      fontFamily: "Satoshi",
-                      color: "rgba(0, 0, 0, 0.6)",
-                      fontSize: "16px",
-                    }}
-                  >
-                    Happy Fans
-                  </p>
-                </div>
+            <div className="relative rounded-[22px] border border-white/70 bg-white/85 backdrop-blur-xl shadow-2xl p-6 md:p-7 flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <p className="tracking-[0.15em] text-[11px] uppercase text-neutral-500">
+                  Featured kit
+                </p>
+                <span className="rounded-full bg-neutral-900 px-3 py-1 text-[11px] font-semibold uppercase text-white">
+                  Limited
+                </span>
               </div>
 
-              {/* Mobile Layout - 2-1 Grid */}
-              <div className="md:hidden">
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  {/* 200+ International Brands */}
-                  <div className="flex flex-col">
-                    <h3
-                      className="text-2xl font-bold mb-1"
-                      style={{
-                        fontFamily: "Montserrat",
-                        fontWeight: 700,
-                        color: "#000000",
-                        fontSize: "32px",
-                        lineHeight: "1.35em",
-                      }}
-                    >
-                      100+
-                    </h3>
-                    <p
-                      className="text-sm"
-                      style={{
-                        fontFamily: "Satoshi",
-                        color: "rgba(0, 0, 0, 0.6)",
-                        fontSize: "14px",
-                      }}
-                    >
-                      Football Clubs
-                    </p>
-                  </div>
+              <div className="rounded-2xl overflow-hidden aspect-[4/5] bg-neutral-900 shadow-lg">
+                <img
+                  src="/product-main-image.png"
+                  alt="Featured jersey"
+                  className="h-full w-full object-cover"
+                />
+              </div>
 
-                  {/* 2,000+ High-Quality Products */}
-                  <div className="flex flex-col">
-                    <h3
-                      className="text-2xl font-bold mb-1"
-                      style={{
-                        fontFamily: "Montserrat",
-                        fontWeight: 700,
-                        color: "#000000",
-                        fontSize: "32px",
-                        lineHeight: "1.35em",
-                      }}
-                    >
-                      500+
-                    </h3>
-                    <p
-                      className="text-sm"
-                      style={{
-                        fontFamily: "Satoshi",
-                        color: "rgba(0, 0, 0, 0.6)",
-                        fontSize: "14px",
-                      }}
-                    >
-                      Authentic Jerseys
-                    </p>
-                  </div>
+              <div className="flex items-start justify-between gap-4">
+                <div className="space-y-1">
+                  <p className="text-[11px] uppercase tracking-[0.15em] text-neutral-500">
+                    Paris 24/25
+                  </p>
+                  <h3
+                    className={`${playfair.className} text-xl font-semibold leading-tight text-neutral-900`}
+                  >
+                    Midnight Third
+                  </h3>
                 </div>
-
-                {/* Second row with single item */}
-                <div className="grid grid-cols-1 gap-4">
-                  {/* 30,000+ Happy Customers */}
-                  <div className="flex flex-col">
-                    <h3
-                      className="text-2xl font-bold mb-1"
-                      style={{
-                        fontFamily: "Montserrat",
-                        fontWeight: 700,
-                        color: "#000000",
-                        fontSize: "32px",
-                        lineHeight: "1.35em",
-                      }}
-                    >
-                      10,000+
-                    </h3>
-                    <p
-                      className="text-sm"
-                      style={{
-                        fontFamily: "Satoshi",
-                        color: "rgba(0, 0, 0, 0.6)",
-                        fontSize: "14px",
-                      }}
-                    >
-                      Happy Fans
-                    </p>
-                  </div>
+                <div className="text-right space-y-1">
+                  <p className="text-xs uppercase tracking-[0.13em] text-neutral-500">
+                    From
+                  </p>
+                  <p
+                    className={`${playfair.className} text-lg font-semibold text-neutral-900`}
+                  >
+                    ₹7,490
+                  </p>
                 </div>
               </div>
             </div>
-
-            {/* Shop Now Button */}
-            <button
-              className="inline-flex items-center justify-center px-12 py-4 font-semibold rounded-full transition-colors duration-200 text-lg hover:bg-gray-800"
-              style={{
-                backgroundColor: "#000000",
-                color: "#FFFFFF",
-                fontFamily: "Satoshi",
-                fontWeight: 500,
-                borderRadius: "62px",
-              }}
-            >
-              Shop Now
-            </button>
           </div>
-        </div>
-
-        {/* Mobile: Hero Background Image Below Content */}
-        <div className="md:hidden relative w-full -mt-48 z-0">
-          <img
-            src="/hero-bg.png"
-            alt="Hero background"
-            className="w-full h-auto object-cover scale-175"
-            style={{ opacity: 0.9 }}
-          />
         </div>
       </section>
 
-      {/* New Arrivals Section */}
-      <NewArrivals />
-
-      {/* Top Selling Section */}
-      <TopSelling />
+      <div className="bg-[#f9f7f4]">
+        <NewArrivals />
+        <TopSelling />
+      </div>
     </div>
   );
 }
-
