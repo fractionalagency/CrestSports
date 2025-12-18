@@ -125,6 +125,67 @@ class ApiClient {
       method: 'DELETE',
     });
   }
+
+  // Order endpoints
+  async createOrder(data: CreateOrderDto): Promise<ApiResponse<Order>> {
+    return this.request<Order>('/orders', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async getOrderByTrackingId(trackingId: string): Promise<ApiResponse<Order>> {
+    return this.request<Order>(`/orders/track/${trackingId}`);
+  }
+}
+
+export interface ShippingAddress {
+  fullName: string;
+  phone: string;
+  addressLine1: string;
+  addressLine2?: string;
+  city: string;
+  state: string;
+  pincode: string;
+  country?: string;
+}
+
+export interface OrderItem {
+  productId: string;
+  quantity: number;
+}
+
+export interface CreateOrderDto {
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  shippingAddress: ShippingAddress;
+  items: OrderItem[];
+  notes?: string;
+}
+
+export interface OrderItemDetail {
+  id: string;
+  productId: string;
+  name: string;
+  price: number;
+  quantity: number;
+  total: number;
+  product: Product;
+}
+
+export interface Order {
+  id: string;
+  trackingId: string;
+  status: string;
+  total: number;
+  subtotal: number;
+  shippingCost: number;
+  customerName: string;
+  customerEmail: string;
+  shippingAddress: ShippingAddress;
+  items: OrderItemDetail[];
+  createdAt: string;
 }
 
 export const api = new ApiClient();

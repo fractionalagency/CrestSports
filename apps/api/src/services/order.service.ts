@@ -3,6 +3,7 @@ import { BadRequestError, NotFoundError } from '@utils/errors';
 import { nanoid } from 'nanoid';
 import type { Order, OrderStatus, Prisma } from '@prisma/client';
 import type { CreateOrderDto } from '../types/schemas';
+import emailService from './email.service';
 
 export class OrderService {
   async create(data: CreateOrderDto): Promise<Order> {
@@ -70,11 +71,19 @@ export class OrderService {
         discount,
         total,
         notes: data.notes,
+        // Bypass payment for now as requested
+        status: 'PAID',
+        paymentStatus: 'COMPLETED',
         statusHistory: [
           {
             status: 'PENDING',
             timestamp: new Date().toISOString(),
             note: 'Order created',
+          },
+          {
+            status: 'PAID',
+            timestamp: new Date().toISOString(),
+            note: 'Payment skipped (Dev Mode)',
           },
         ],
       },
@@ -85,6 +94,12 @@ export class OrderService {
           },
         },
       },
+    });
+
+    // Send confirmation email
+    // We don't await this to avoid blocking the response
+    emailService.sendOrderConfirmation(order as any).catch((err) => {
+      console.error('Failed to send order confirmation email:', err);
     });
 
     return order;
