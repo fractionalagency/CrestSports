@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation"
 import Header from "@/components/Header"
 
-const noHeaderRoutes = ["/login", "/admin", "/dashboard"]
+const noHeaderRoutes = ["/login", "/admin", "/dashboard", "/terms", "/privacy", "/about"]
 
 export function HeaderWrapper() {
   const pathname = usePathname()
