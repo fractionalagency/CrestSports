@@ -179,6 +179,35 @@ export class OrderService {
     return result;
   }
 
+  async findAll(page = 1, limit = 20) {
+    const skip = (page - 1) * limit;
+    const [orders, total] = await Promise.all([
+      prisma.order.findMany({
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          items: {
+            include: {
+              product: true,
+            },
+          },
+        },
+      }),
+      prisma.order.count(),
+    ]);
+
+    return {
+      orders,
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
+    };
+  }
+
   async findById(id: string): Promise<Order> {
     const order = await prisma.order.findUnique({
       where: { id },

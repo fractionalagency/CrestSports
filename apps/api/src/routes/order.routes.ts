@@ -6,6 +6,17 @@ import { createOrderSchema, orderIdSchema, trackingIdSchema } from '../types/sch
 
 const router: Router = Router();
 
+// GET /api/v1/orders - List all orders
+router.get(
+  '/',
+  async (req: Request, res: Response): Promise<Response> => {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 20;
+    const result = await orderService.findAll(page, limit);
+    return sendSuccess(res, result);
+  }
+);
+
 // POST /api/v1/orders - Create new order
 router.post(
   '/',

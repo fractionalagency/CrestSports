@@ -41,12 +41,7 @@ const data = {
       title: "Products",
       url: "/dashboard/products",
       icon: IconPackage,
-    },
-    {
-      title: "Analytics",
-      url: "/dashboard/analytics",
-      icon: IconChartBar,
-    },
+    }
   ],
 };
 

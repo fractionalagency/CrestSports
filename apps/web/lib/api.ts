@@ -144,6 +144,22 @@ class ApiClient {
     return this.request('/orders/analytics');
   }
 
+  async getOrders(page = 1, limit = 20): Promise<ApiResponse<{
+    orders: Order[];
+    pagination: {
+      page: number;
+      limit: number;
+      total: number;
+      totalPages: number;
+    };
+  }>> {
+    return this.request(`/orders?page=${page}&limit=${limit}`);
+  }
+
+  async getOrderById(id: string): Promise<ApiResponse<Order>> {
+    return this.request<Order>(`/orders/${id}`);
+  }
+
   async createOrder(data: CreateOrderDto): Promise<ApiResponse<Order>> {
     return this.request<Order>('/orders', {
       method: 'POST',
