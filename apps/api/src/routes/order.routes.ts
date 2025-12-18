@@ -16,6 +16,24 @@ router.post(
   }
 );
 
+// GET /api/v1/orders/stats - Get dashboard stats
+router.get(
+  '/stats',
+  async (_req: Request, res: Response): Promise<Response> => {
+    const stats = await orderService.getDashboardStats();
+    return sendSuccess(res, stats);
+  }
+);
+
+// GET /api/v1/orders/analytics - Get dashboard analytics
+router.get(
+  '/analytics',
+  async (_req: Request, res: Response): Promise<Response> => {
+    const analytics = await orderService.getAnalytics();
+    return sendSuccess(res, analytics);
+  }
+);
+
 // GET /api/v1/orders/:id - Get order by ID
 router.get(
   '/:id',

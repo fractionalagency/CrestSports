@@ -2,7 +2,7 @@
  * API Client for CrestSports backend
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
 const API_VERSION = 'v1';
 
 interface ApiResponse<T> {
@@ -127,6 +127,23 @@ class ApiClient {
   }
 
   // Order endpoints
+  async getDashboardStats(): Promise<ApiResponse<{
+    totalRevenue: number;
+    totalOrders: number;
+    activeOrders: number;
+    avgOrderValue: number;
+  }>> {
+    return this.request('/orders/stats');
+  }
+
+  async getDashboardAnalytics(): Promise<ApiResponse<Array<{
+    date: string;
+    revenue: number;
+    orders: number;
+  }>>> {
+    return this.request('/orders/analytics');
+  }
+
   async createOrder(data: CreateOrderDto): Promise<ApiResponse<Order>> {
     return this.request<Order>('/orders', {
       method: 'POST',
