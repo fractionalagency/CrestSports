@@ -41,6 +41,14 @@ export const createProductSchema = z.object({
 
 export const updateProductSchema = createProductSchema.partial();
 
+// Category schemas
+export const createCategorySchema = z.object({
+  name: z.string().min(1).max(100),
+  slug: z.string().min(1).max(100),
+  description: z.string().optional(),
+  imageUrl: z.string().url().optional(),
+});
+
 // Order schemas
 export const shippingAddressSchema = z.object({
   fullName: z.string().min(1),
@@ -95,6 +103,7 @@ export type PaginationQuery = z.infer<typeof paginationSchema>;
 export type ProductListQuery = z.infer<typeof productListSchema>;
 export type CreateProductDto = z.infer<typeof createProductSchema>;
 export type UpdateProductDto = z.infer<typeof updateProductSchema>;
+export type CreateCategoryDto = z.infer<typeof createCategorySchema>;
 export type CreateOrderDto = z.infer<typeof createOrderSchema>;
 export type VerifyPaymentDto = z.infer<typeof verifyPaymentSchema>;
 export type UpdateOrderStatusDto = z.infer<typeof updateOrderStatusSchema>;

@@ -121,6 +121,13 @@ class ApiClient {
     return this.request<Category[]>('/categories');
   }
 
+  async createCategory(data: Partial<Category>): Promise<ApiResponse<Category>> {
+    return this.request<Category>('/categories', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
   async getFeaturedProducts(): Promise<ApiResponse<Product[]>> {
     return this.request<Product[]>('/products/featured');
   }

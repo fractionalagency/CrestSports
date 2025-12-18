@@ -37,6 +37,7 @@ export default function ProductsPage() {
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false)
   
   // Wizard State
   const [step, setStep] = useState(1)
@@ -51,6 +52,13 @@ export default function ProductsPage() {
     sku: "",
     categoryId: "",
     stock: "0",
+    description: "",
+  })
+
+  // Category Form State
+  const [categoryForm, setCategoryForm] = useState({
+    name: "",
+    slug: "",
     description: "",
   })
 
@@ -148,6 +156,27 @@ export default function ProductsPage() {
     } catch (error) {
       console.error("Failed to create product", error)
       toast.error("Failed to create product")
+    }
+  }
+
+  const handleCreateCategory = async () => {
+    if (!categoryForm.name || !categoryForm.slug) {
+      toast.error("Name and Slug are required")
+      return
+    }
+
+    try {
+      const response = await api.createCategory(categoryForm)
+      if (response.success) {
+        toast.success("Category created successfully")
+        await fetchCategories()
+        setFormData({ ...formData, categoryId: response.data.id })
+        setIsCategoryDialogOpen(false)
+        setCategoryForm({ name: "", slug: "", description: "" })
+      }
+    } catch (error) {
+      console.error("Failed to create category", error)
+      toast.error("Failed to create category")
     }
   }
 
@@ -253,21 +282,67 @@ export default function ProductsPage() {
 
                   <div className="col-span-2">
                     <Label htmlFor="category">Category</Label>
-                    <Select 
-                      value={formData.categoryId} 
-                      onValueChange={(value) => setFormData({ ...formData, categoryId: value })}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {categories.map((category) => (
-                          <SelectItem key={category.id} value={category.id}>
-                            {category.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <div className="flex gap-2">
+                      <Select 
+                        value={formData.categoryId} 
+                        onValueChange={(value) => setFormData({ ...formData, categoryId: value })}
+                      >
+                        <SelectTrigger className="flex-1">
+                          <SelectValue placeholder="Select a category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {categories.map((category) => (
+                            <SelectItem key={category.id} value={category.id}>
+                              {category.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
+                        <DialogTrigger asChild>
+                          <Button variant="outline" size="icon" title="Add New Category">
+                            <Plus className="w-4 h-4" />
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Create New Category</DialogTitle>
+                          </DialogHeader>
+                          <div className="space-y-4 py-4">
+                            <div>
+                              <Label htmlFor="cat-name">Name</Label>
+                              <Input
+                                id="cat-name"
+                                value={categoryForm.name}
+                                onChange={(e) => setCategoryForm({ ...categoryForm, name: e.target.value })}
+                                placeholder="Category Name"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="cat-slug">Slug</Label>
+                              <Input
+                                id="cat-slug"
+                                value={categoryForm.slug}
+                                onChange={(e) => setCategoryForm({ ...categoryForm, slug: e.target.value })}
+                                placeholder="category-slug"
+                              />
+                            </div>
+                            <div>
+                              <Label htmlFor="cat-desc">Description</Label>
+                              <Input
+                                id="cat-desc"
+                                value={categoryForm.description}
+                                onChange={(e) => setCategoryForm({ ...categoryForm, description: e.target.value })}
+                                placeholder="Optional description"
+                              />
+                            </div>
+                            <Button onClick={handleCreateCategory} className="w-full">
+                              Create Category
+                            </Button>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
                   </div>
 
                   <div className="col-span-2">
