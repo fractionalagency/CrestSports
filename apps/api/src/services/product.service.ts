@@ -101,6 +101,40 @@ export class ProductService {
       },
     });
   }
+
+  async create(data: any): Promise<Product> {
+    // Check if slug or sku already exists
+    const existingProduct = await prisma.product.findFirst({
+      where: {
+        OR: [{ slug: data.slug }, { sku: data.sku }],
+      },
+    });
+
+    if (existingProduct) {
+      throw new Error('Product with this slug or SKU already exists');
+    }
+
+    return prisma.product.create({
+      data,
+      include: {
+        category: true,
+      },
+    });
+  }
+
+  async delete(id: string): Promise<void> {
+    const product = await prisma.product.findUnique({
+      where: { id },
+    });
+
+    if (!product) {
+      throw new NotFoundError('Product not found');
+    }
+
+    await prisma.product.delete({
+      where: { id },
+    });
+  }
 }
 
 export default new ProductService();

@@ -112,6 +112,19 @@ class ApiClient {
   async getFeaturedProducts(): Promise<ApiResponse<Product[]>> {
     return this.request<Product[]>('/products/featured');
   }
+
+  async createProduct(data: Partial<Product>): Promise<ApiResponse<Product>> {
+    return this.request<Product>('/products', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteProduct(id: string): Promise<ApiResponse<void>> {
+    return this.request<void>(`/products/${id}`, {
+      method: 'DELETE',
+    });
+  }
 }
 
 export const api = new ApiClient();
