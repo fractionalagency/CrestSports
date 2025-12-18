@@ -1,16 +1,52 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { ChartAreaInteractive } from "@/components/chart-area-interactive"
-import { DataTable } from "@/components/data-table"
-import { SectionCards } from "@/components/section-cards"
-import { SiteHeader } from "@/components/site-header"
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { AppSidebar } from "@/components/app-sidebar";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { DataTable } from "@/components/data-table";
+import { SectionCards } from "@/components/section-cards";
+import { SiteHeader } from "@/components/site-header";
 import {
   SidebarInset,
   SidebarProvider,
-} from "@workspace/ui/components/sidebar"
+} from "@workspace/ui/components/sidebar";
 
-import data from "./data.json"
+import data from "./data.json";
 
 export default function Page() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Check if user is authenticated
+    const checkAuth = async () => {
+      try {
+        const response = await fetch("/api/auth/status");
+        const data = await response.json();
+
+        if (!data.authenticated) {
+          router.push("/login");
+        }
+      } catch (err) {
+        router.push("/login");
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
+  const logout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+      localStorage.removeItem("admin_authenticated");
+      router.push("/login");
+    } catch (err) {
+      // Even if API call fails, clear local state
+      localStorage.removeItem("admin_authenticated");
+      router.push("/login");
+    }
+  };
+
   return (
     <SidebarProvider
       style={
@@ -36,5 +72,5 @@ export default function Page() {
         </div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }
