@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import productService from '@services/product.service';
 import { sendSuccess } from '@utils/response';
 import { validateRequest } from '@middleware/validate';
+import { authenticateAdmin } from '@middleware/auth';
 import { productListSchema, productIdSchema, createProductSchema } from '../types/schemas';
 
 const router: Router = Router();
@@ -9,6 +10,7 @@ const router: Router = Router();
 // POST /api/v1/products - Create a new product
 router.post(
   '/',
+  authenticateAdmin,
   validateRequest({ body: createProductSchema }),
   async (req: Request, res: Response): Promise<Response> => {
     const product = await productService.create(req.body);
@@ -19,6 +21,7 @@ router.post(
 // DELETE /api/v1/products/:id - Delete a product
 router.delete(
   '/:id',
+  authenticateAdmin,
   validateRequest({ params: productIdSchema }),
   async (req: Request, res: Response): Promise<Response> => {
     await productService.delete(req.params.id!);

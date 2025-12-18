@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import categoryService from '@services/category.service';
 import { sendSuccess } from '@utils/response';
 import { validateRequest } from '@middleware/validate';
+import { authenticateAdmin } from '@middleware/auth';
 import { createCategorySchema } from '../types/schemas';
 
 const router: Router = Router();
@@ -18,6 +19,7 @@ router.get(
 // POST /api/v1/categories - Create a new category
 router.post(
   '/',
+  authenticateAdmin,
   validateRequest({ body: createCategorySchema }),
   async (req: Request, res: Response): Promise<Response> => {
     const category = await categoryService.create(req.body);

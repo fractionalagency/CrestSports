@@ -98,6 +98,10 @@ export const updateOrderStatusSchema = z.object({
 });
 
 // Admin analytics schemas
+export const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1),
+});
 
 export type PaginationQuery = z.infer<typeof paginationSchema>;
 export type ProductListQuery = z.infer<typeof productListSchema>;

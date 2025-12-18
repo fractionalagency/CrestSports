@@ -18,6 +18,7 @@ import {
 import { Input } from "@workspace/ui/components/input";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { api } from "@/lib/api";
 
 export function LoginForm({
   className,
@@ -35,28 +36,18 @@ export function LoginForm({
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await api.login(email, password);
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        // Set admin session
-        localStorage.setItem("admin_authenticated", "true");
+      if (response.success) {
         router.push("/dashboard");
       } else {
-        setError(data.error || "Login failed");
+        setError(response.message || "Invalid credentials");
       }
     } catch (err) {
-      setError("Network error. Please try again.");
+      setError("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (

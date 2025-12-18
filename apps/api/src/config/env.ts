@@ -33,6 +33,8 @@ const envSchema = z.object({
   JWT_SECRET: z.string().min(32),
   JWT_EXPIRES_IN: z.string().default('7d'),
   API_KEY: z.string().optional(),
+  ADMIN_EMAIL: z.string().email(),
+  ADMIN_PASSWORD: z.string().min(8),
 
   // Rate Limiting
   RATE_LIMIT_WINDOW_MS: z.string().default('900000'),
@@ -91,6 +93,8 @@ export const config = {
     jwtSecret: env.JWT_SECRET,
     jwtExpiresIn: env.JWT_EXPIRES_IN,
     apiKey: env.API_KEY,
+    adminEmail: env.ADMIN_EMAIL,
+    adminPassword: env.ADMIN_PASSWORD,
   },
 
   rateLimit: {

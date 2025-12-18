@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import orderService from '@services/order.service';
 import { sendSuccess, sendCreated } from '@utils/response';
 import { validateRequest } from '@middleware/validate';
+import { authenticateAdmin } from '@middleware/auth';
 import { createOrderSchema, orderIdSchema, trackingIdSchema } from '../types/schemas';
 
 const router: Router = Router();
@@ -9,6 +10,7 @@ const router: Router = Router();
 // GET /api/v1/orders - List all orders
 router.get(
   '/',
+  authenticateAdmin,
   async (req: Request, res: Response): Promise<Response> => {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 20;
@@ -30,6 +32,7 @@ router.post(
 // GET /api/v1/orders/stats - Get dashboard stats
 router.get(
   '/stats',
+  authenticateAdmin,
   async (_req: Request, res: Response): Promise<Response> => {
     const stats = await orderService.getDashboardStats();
     return sendSuccess(res, stats);
@@ -39,6 +42,7 @@ router.get(
 // GET /api/v1/orders/analytics - Get dashboard analytics
 router.get(
   '/analytics',
+  authenticateAdmin,
   async (_req: Request, res: Response): Promise<Response> => {
     const analytics = await orderService.getAnalytics();
     return sendSuccess(res, analytics);
@@ -48,6 +52,7 @@ router.get(
 // GET /api/v1/orders/:id - Get order by ID
 router.get(
   '/:id',
+  authenticateAdmin,
   validateRequest({ params: orderIdSchema }),
   async (req: Request, res: Response): Promise<Response> => {
     const order = await orderService.findById(req.params.id!);

@@ -62,9 +62,27 @@ interface ProductListParams {
 
 class ApiClient {
   private baseUrl: string;
+  private token: string | null = null;
 
   constructor() {
     this.baseUrl = `${API_BASE_URL}/api/${API_VERSION}`;
+    if (typeof window !== 'undefined') {
+      this.token = localStorage.getItem('admin_token');
+    }
+  }
+
+  setToken(token: string) {
+    this.token = token;
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('admin_token', token);
+    }
+  }
+
+  logout() {
+    this.token = null;
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('admin_token');
+    }
   }
 
   private async request<T>(
@@ -73,18 +91,31 @@ class ApiClient {
   ): Promise<ApiResponse<T>> {
     const url = `${this.baseUrl}${endpoint}`;
     
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+      ...(options.headers as Record<string, string>),
+    };
+
+    if (this.token) {
+      headers['Authorization'] = `Bearer ${this.token}`;
+    }
+
     const config: RequestInit = {
       ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
+      headers,
     };
 
     try {
       const response = await fetch(url, config);
       
       if (!response.ok) {
+        if (response.status === 401) {
+          this.logout();
+          // Optional: Redirect to login if window exists
+          if (typeof window !== 'undefined' && !window.location.pathname.includes('/login')) {
+             window.location.href = '/login';
+          }
+        }
         throw new Error(`API Error: ${response.statusText}`);
       }
 
@@ -93,6 +124,19 @@ class ApiClient {
       console.error('API Request Failed:', error);
       throw error;
     }
+  }
+
+  async login(email: string, password: string): Promise<ApiResponse<{ token: string; admin: any }>> {
+    const response = await this.request<{ token: string; admin: any }>('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+    });
+    
+    if (response.success && response.data.token) {
+      this.setToken(response.data.token);
+    }
+    
+    return response;
   }
 
   // Product endpoints
