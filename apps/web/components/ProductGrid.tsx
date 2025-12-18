@@ -34,17 +34,19 @@ const convertApiProduct = (apiProduct: ApiProduct): Product => {
 };
 
 // Function to fetch products from API
-const fetchProducts = async (isFeatured?: boolean): Promise<Product[]> => {
+const fetchProducts = async (isFeatured?: boolean, limit: number = 8): Promise<Product[]> => {
   try {
     const response = isFeatured
       ? await api.getFeaturedProducts()
-      : await api.getProducts({ isActive: true, limit: 10 });
+      : await api.getProducts({ isActive: true, limit });
 
     if (!response.success || !response.data) {
       throw new Error("Failed to fetch products");
     }
 
-    return response.data.map(convertApiProduct);
+    // Slice the data if it's featured (since API might return all)
+    const data = isFeatured ? response.data.slice(0, limit) : response.data;
+    return data.map(convertApiProduct);
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
@@ -57,6 +59,8 @@ interface ProductGridProps {
   products?: Product[];
   showViewAll?: boolean;
   className?: string;
+  limit?: number;
+  hideHeader?: boolean;
 }
 
 const ProductGrid: React.FC<ProductGridProps> = ({
@@ -65,6 +69,8 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   products,
   showViewAll = true,
   className = "",
+  limit = 8,
+  hideHeader = false,
 }) => {
   const [productData, setProductData] = useState<Product[]>(products || []);
   const [loading, setLoading] = useState<boolean>(!products);
@@ -75,14 +81,14 @@ const ProductGrid: React.FC<ProductGridProps> = ({
         setLoading(true);
         // Determine which products to fetch based on the title
         const isFeatured = title.toLowerCase().includes("new");
-        const data = await fetchProducts(isFeatured);
+        const data = await fetchProducts(isFeatured, limit);
         setProductData(data);
         setLoading(false);
       };
 
       loadProducts();
     }
-  }, [products, title]);
+  }, [products, title, limit]);
 
   if (loading) {
     return (
@@ -98,48 +104,49 @@ const ProductGrid: React.FC<ProductGridProps> = ({
   return (
     <section
       className={`py-6 md:py-10 ${className}`}
-      style={{ backgroundColor: "white" }}
     >
       <div className="max-w-7xl mx-auto px-2 md:px-4">
         {/* Header - True H&M Style */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 md:mb-8">
-          <div className="mb-3 md:mb-0">
-            <h2
-              className="text-xl md:text-2xl font-bold mb-1"
-              style={{
-                fontFamily: "Helvetica Neue, Arial, sans-serif",
-                fontWeight: 700,
-                color: "#000000",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              {title}
-            </h2>
-            {subtitle && (
-              <p
-                className="text-sm text-gray-600 mt-1"
+        {!hideHeader && (
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 md:mb-8">
+            <div className="mb-3 md:mb-0">
+              <h2
+                className="text-xl md:text-2xl font-bold mb-1"
                 style={{
                   fontFamily: "Helvetica Neue, Arial, sans-serif",
-                  fontWeight: 400,
+                  fontWeight: 700,
+                  color: "#000000",
+                  letterSpacing: "-0.02em",
                 }}
               >
-                {subtitle}
-              </p>
+                {title}
+              </h2>
+              {subtitle && (
+                <p
+                  className="text-sm text-gray-600 mt-1"
+                  style={{
+                    fontFamily: "Helvetica Neue, Arial, sans-serif",
+                    fontWeight: 400,
+                  }}
+                >
+                  {subtitle}
+                </p>
+              )}
+            </div>
+
+            {showViewAll && (
+              <button
+                className="px-4 py-2 border border-black text-sm font-medium transition-all duration-300 hover:bg-black hover:text-white"
+                style={{
+                  fontFamily: "Helvetica Neue, Arial, sans-serif",
+                  fontWeight: 500,
+                }}
+              >
+                View All
+              </button>
             )}
           </div>
-
-          {showViewAll && (
-            <button
-              className="px-4 py-2 border border-black text-sm font-medium transition-all duration-300 hover:bg-black hover:text-white"
-              style={{
-                fontFamily: "Helvetica Neue, Arial, sans-serif",
-                fontWeight: 500,
-              }}
-            >
-              View All
-            </button>
-          )}
-        </div>
+        )}
 
         {/* Products Grid - True H&M Seamless Style */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 md:gap-2">
@@ -157,19 +164,6 @@ const ProductGrid: React.FC<ProductGridProps> = ({
             />
           ))}
         </div>
-
-        {/* Load More Button - H&M Style */}
-        <div className="flex justify-center mt-8 md:mt-10">
-          <button
-            className="px-6 py-2 bg-black text-white text-sm font-medium transition-all duration-300 hover:bg-gray-800"
-            style={{
-              fontFamily: "Helvetica Neue, Arial, sans-serif",
-              fontWeight: 500,
-            }}
-          >
-            Load more
-          </button>
-        </div>
       </div>
     </section>
   );
@@ -178,23 +172,33 @@ const ProductGrid: React.FC<ProductGridProps> = ({
 export default ProductGrid;
 
 // Export pre-configured product grids for easy use
-export const NewArrivals: React.FC<{ className?: string }> = ({
+export const NewArrivals: React.FC<{ className?: string; limit?: number; hideHeader?: boolean }> = ({
   className,
+  limit,
+  hideHeader,
 }) => (
   <ProductGrid
     title="New arrivals"
     subtitle="Check out our latest collection"
     className={className}
     showViewAll={false}
+    limit={limit}
+    hideHeader={hideHeader}
   />
 );
 
-export const TopSelling: React.FC<{ className?: string }> = ({ className }) => (
+export const TopSelling: React.FC<{ className?: string; limit?: number; hideHeader?: boolean }> = ({
+  className,
+  limit,
+  hideHeader,
+}) => (
   <ProductGrid
     title="Top selling"
     subtitle="Our most popular items right now"
     className={className}
     showViewAll={false}
+    limit={limit}
+    hideHeader={hideHeader}
   />
 );
 
