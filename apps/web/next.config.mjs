@@ -7,6 +7,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "nirvik30.github.io",
       },
+      {
+        protocol: "https",
+        hostname: "flinmjmirailwdprjedu.supabase.co",
+      },
     ],
   },
 };

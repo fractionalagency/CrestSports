@@ -235,6 +235,7 @@ export interface Order {
   shippingCost: number;
   customerName: string;
   customerEmail: string;
+  customerPhone: string;
   shippingAddress: ShippingAddress;
   items: OrderItemDetail[];
   createdAt: string;

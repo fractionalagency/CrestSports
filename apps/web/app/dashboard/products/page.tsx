@@ -31,6 +31,7 @@ import {
 import { Card, CardContent } from "@workspace/ui/components/card"
 import { toast } from "sonner"
 import { X, Plus, Image as ImageIcon, ArrowRight, ArrowLeft } from "lucide-react"
+import { ImageUpload } from "@/components/ui/image-upload"
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([])
@@ -119,10 +120,8 @@ export default function ProductsPage() {
     }
   }
 
-  const handleRemoveImage = (index: number) => {
-    const newImages = [...images]
-    newImages.splice(index, 1)
-    setImages(newImages)
+  const handleRemoveImage = (urlToRemove: string) => {
+    setImages(images.filter((url) => url !== urlToRemove))
   }
 
   const handleNextStep = () => {
@@ -359,9 +358,9 @@ export default function ProductsPage() {
 
               {step === 2 && (
                 <div className="space-y-4">
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 items-end">
                     <div className="flex-1">
-                      <Label htmlFor="imageUrl" className="sr-only">Image URL</Label>
+                      <Label htmlFor="imageUrl">Add by URL</Label>
                       <Input
                         id="imageUrl"
                         value={currentImageUrl}
@@ -376,38 +375,19 @@ export default function ProductsPage() {
                       />
                     </div>
                     <Button onClick={handleAddImage} type="button" variant="secondary">
-                      <Plus className="w-4 h-4 mr-2" /> Add
+                      <Plus className="w-4 h-4 mr-2" /> Add URL
                     </Button>
                   </div>
 
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
-                    {images.map((url, index) => (
-                      <Card key={index} className="relative group overflow-hidden">
-                        <CardContent className="p-0 aspect-square relative">
-                          <img 
-                            src={url} 
-                            alt={`Product ${index + 1}`} 
-                            className="w-full h-full object-cover"
-                          />
-                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <Button 
-                              variant="destructive" 
-                              size="icon" 
-                              onClick={() => handleRemoveImage(index)}
-                            >
-                              <X className="w-4 h-4" />
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                    {images.length === 0 && (
-                      <div className="col-span-full flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-lg text-muted-foreground">
-                        <ImageIcon className="w-8 h-8 mb-2" />
-                        <p>No images added yet</p>
-                        <p className="text-sm">Add at least 4 images</p>
-                      </div>
-                    )}
+                  <div className="pt-4">
+                    <Label className="mb-2 block">Product Images</Label>
+                    <ImageUpload
+                      value={images}
+                      onChange={setImages}
+                      onRemove={handleRemoveImage}
+                      maxFiles={10}
+                      bucketName="CrestSports"
+                    />
                   </div>
                   
                   <div className="text-sm text-muted-foreground text-right">
