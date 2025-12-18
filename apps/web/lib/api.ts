@@ -41,6 +41,14 @@ interface Product {
   };
 }
 
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  imageUrl: string | null;
+}
+
 interface ProductListParams {
   page?: number;
   limit?: number;
@@ -107,6 +115,10 @@ class ApiClient {
 
   async getProductById(id: string): Promise<ApiResponse<Product>> {
     return this.request<Product>(`/products/${id}`);
+  }
+
+  async getCategories(): Promise<ApiResponse<Category[]>> {
+    return this.request<Category[]>('/categories');
   }
 
   async getFeaturedProducts(): Promise<ApiResponse<Product[]>> {

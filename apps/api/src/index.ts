@@ -15,6 +15,7 @@ import healthRouter from '@routes/health.routes';
 import productRouter from '@routes/product.routes';
 import orderRouter from '@routes/order.routes';
 import paymentRouter from '@routes/payment.routes';
+import categoryRouter from '@routes/category.routes';
 import devRouter from '@routes/dev.routes';
 
 const app: Application = express();
@@ -64,6 +65,7 @@ const apiPrefix = `/api/${config.apiVersion}`;
 
 app.use(`${apiPrefix}/health`, healthRouter);
 app.use(`${apiPrefix}/products`, productRouter);
+app.use(`${apiPrefix}/categories`, categoryRouter);
 app.use(`${apiPrefix}/orders`, orderRouter);
 app.use(`${apiPrefix}/payments`, paymentRouter);
 
