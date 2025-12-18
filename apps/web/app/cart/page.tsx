@@ -5,6 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/contexts/CartContext";
+import { Playfair_Display } from "next/font/google";
+import { ArrowRight } from "lucide-react";
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
 
 export default function CartPage() {
   const router = useRouter();
@@ -12,17 +19,28 @@ export default function CartPage() {
 
   if (cart.items.length === 0) {
     return (
-      <div className="min-h-screen bg-white py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-3xl font-bold mb-6">Your Cart is Empty</h1>
-          <p className="text-gray-600 mb-8">
-            Looks like you haven't added any items to your cart yet.
+      <div className="min-h-[80vh] bg-white flex items-center justify-center">
+        <div className="container mx-auto px-4 text-center max-w-md">
+          <div className="relative w-64 h-64 mx-auto mb-8 rounded-full overflow-hidden bg-neutral-50 shadow-2xl">
+             <Image
+                src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=800&auto=format&fit=crop"
+                alt="Cool Cat"
+                fill
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+             />
+          </div>
+          <h1 className={`${playfair.className} text-4xl font-bold mb-4 text-neutral-900`}>
+            Your Cart is Empty
+          </h1>
+          <p className="text-neutral-500 mb-10 text-lg leading-relaxed">
+            Looks like you haven't made your choice yet. Even the cat is waiting for you to pick something stylish.
           </p>
           <Link
-            href="/"
-            className="px-8 py-3 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+            href="/product"
+            className="inline-flex items-center gap-2 px-10 py-4 bg-black text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-neutral-800 transition-all duration-300 group"
           >
             Start Shopping
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>
