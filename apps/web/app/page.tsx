@@ -71,7 +71,7 @@ export default function Home() {
           {/* Large Item */}
           <div className="relative group overflow-hidden rounded-sm h-full">
             <Image
-              src="https://images.unsplash.com/photo-1522778119026-d647f0565c6a?q=80&w=2000&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=2000&auto=format&fit=crop" 
               alt="Men's Collection"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
