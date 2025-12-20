@@ -214,7 +214,7 @@ export default function ProductDetailPage() {
             {/* Main Image */}
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-50 rounded-sm">
               <Image
-                src={productImages[selectedImageIndex]}
+                src={productImages[selectedImageIndex] || "/placeholder.png"}
                 alt={product.name}
                 fill
                 className="object-cover"
@@ -238,7 +238,7 @@ export default function ProductDetailPage() {
                   }`}
                 >
                   <Image
-                    src={image}
+                    src={image || "/placeholder.png"}
                     alt={`View ${index + 1}`}
                     fill
                     className="object-cover"
