@@ -188,12 +188,13 @@ export default function ProductDetailPage() {
   if (!product) return null;
 
   const fallbackImage = product.imageUrl || "/next.svg";
-  const productImages: string[] =
-    product.allImages && product.allImages.length > 0
-      ? (product.allImages.filter((img): img is string =>
-          Boolean(img),
-        ) as string[])
-      : [fallbackImage];
+  let images = (product.allImages ?? []).filter((img): img is string =>
+    Boolean(img),
+  );
+  if (images.length === 0) {
+    images = [fallbackImage];
+  }
+  const productImages: string[] = images;
 
   const handleAddToCart = () => {
     if (!product) return;
@@ -252,45 +253,47 @@ export default function ProductDetailPage() {
       <div className="container mx-auto px-4 md:px-8 py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Images (Editorial Style) */}
-          <div className="lg:col-span-7 space-y-4">
-            {/* Main Image */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden bg-neutral-50">
-              <Image
-                src={productImages[selectedImageIndex]}
-                alt={product.name}
-                fill
-                className="object-cover"
-                priority
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-              {product.discountPercentage && (
-                <div className="absolute top-4 left-4 bg-black text-white px-3 py-1 text-xs font-bold uppercase tracking-widest">
-                  -{product.discountPercentage}%
-                </div>
-              )}
-            </div>
+          <div className="lg:col-span-7">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
+              {/* Thumbnails - vertical on desktop, grid on mobile */}
+              <div className="lg:col-span-1 grid grid-cols-4 lg:grid-cols-1 gap-3">
+                {productImages.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSelectedImageIndex(index)}
+                    className={`relative aspect-[4/5] overflow-hidden transition-all duration-300 ${
+                      selectedImageIndex === index
+                        ? "opacity-100 ring-1 ring-black"
+                        : "opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <Image
+                      src={image || fallbackImage}
+                      alt={`View ${index + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="120px"
+                    />
+                  </button>
+                ))}
+              </div>
 
-            {/* Thumbnail Grid */}
-            <div className="grid grid-cols-4 gap-4">
-              {productImages.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedImageIndex(index)}
-                  className={`relative aspect-[4/5] overflow-hidden transition-all duration-300 ${
-                    selectedImageIndex === index
-                      ? "opacity-100 ring-1 ring-black"
-                      : "opacity-60 hover:opacity-100"
-                  }`}
-                >
-                  <Image
-                    src={image}
-                    alt={`View ${index + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="150px"
-                  />
-                </button>
-              ))}
+              {/* Main Image */}
+              <div className="lg:col-span-4 relative aspect-[4/5] w-full overflow-hidden bg-neutral-50">
+                <Image
+                  src={productImages[selectedImageIndex]}
+                  alt={product.name}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(min-width: 1024px) 70vw, 100vw"
+                />
+                {product.discountPercentage && (
+                  <div className="absolute top-4 left-4 bg-black text-white px-3 py-1 text-xs font-bold uppercase tracking-widest">
+                    -{product.discountPercentage}%
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
