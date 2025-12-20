@@ -164,24 +164,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- NEW ARRIVALS (Editorial Layout) --- */}
-      <section className="py-24 bg-neutral-50/50">
+{/* --- NEW ARRIVALS (Clean Editorial Grid) --- */}
+      <section className="py-24 bg-white relative">
         <div className="container mx-auto px-6 md:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-            <div className="max-w-2xl">
-              <span className="text-xs font-bold tracking-[0.2em] uppercase text-neutral-400 mb-4 block">
-                Fresh from the Pitch
-              </span>
-              <h2 className="font-playfair text-5xl md:text-6xl text-neutral-900 leading-tight">
+          
+          {/* 1. Header Section */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-black/5 pb-8">
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                 <span className="w-2 h-2 bg-black rounded-full animate-pulse"></span>
+                 <span className="text-xs font-bold tracking-[0.25em] uppercase text-neutral-400">
+                   Just Landed
+                 </span>
+              </div>
+              <h2 className="font-playfair text-5xl md:text-6xl text-neutral-900 leading-none">
                 New Arrivals
               </h2>
             </div>
-            <Link href="/product" className="group inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-widest hover:text-neutral-600 transition-colors">
-              View All Products 
+
+            {/* Desktop Link (Magnetic Feel) */}
+            <Link 
+              href="/product" 
+              className="hidden md:inline-flex group items-center gap-3 px-6 py-3 border border-transparent hover:border-black rounded-full transition-all duration-300"
+            >
+              <span className="text-sm font-bold uppercase tracking-widest">View Collection</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-          <NewArrivals limit={4} hideHeader={true} />
+
+          {/* 2. Your Dynamic Product Grid */}
+          {/* We wrap it in a fade-in animation container */}
+          <div className="animate-fade-in-up">
+            <NewArrivals limit={4} hideHeader={true} />
+          </div>
+
+          {/* 3. Mobile Bottom Link */}
+          <div className="mt-10 md:hidden flex justify-center">
+            <Link href="/product" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] border-b border-black pb-1">
+              Shop All Products <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+
         </div>
       </section>
 
@@ -246,30 +269,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- TRENDING SECTION --- */}
-      <section className="py-24 bg-white border-t border-neutral-100">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between mb-16">
-            <h2 className="font-playfair text-4xl md:text-5xl text-neutral-900">
-              Trending Now
-            </h2>
-            <Link href="/product" className="hidden md:inline-flex items-center gap-2 text-sm font-medium hover:underline">
-              Shop All <ArrowRight className="w-4 h-4" />
+    {/* --- TRENDING SECTION (Editorial Layout) --- */}
+      <section className="py-24 md:py-32 bg-neutral-50 relative overflow-hidden border-t border-neutral-200">
+        
+        {/* Background Decorative Watermark (Adds depth) */}
+        <div className="absolute -top-12 -right-12 md:top-0 md:right-0 p-12 opacity-[0.03] pointer-events-none select-none">
+           <span className="font-playfair text-[12rem] leading-none text-black"></span>
+        </div>
+
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+            <div className="space-y-3">
+              <span className="text-xs font-bold tracking-[0.25em] uppercase text-neutral-400">
+                Community Favorites
+              </span>
+              <h2 className="font-playfair text-5xl md:text-6xl text-neutral-900 leading-none">
+                Trending <span className="italic text-neutral-500 font-light">Now.</span>
+              </h2>
+            </div>
+            
+            {/* Interactive Pill Button */}
+            <Link 
+              href="/product" 
+              className="group inline-flex items-center gap-3 px-8 py-3 rounded-full border border-neutral-300 hover:border-neutral-900 hover:bg-neutral-900 hover:text-white transition-all duration-300 ease-out"
+            >
+              <span className="text-xs font-bold uppercase tracking-widest">Shop Full List</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
-          <TopSelling limit={4} hideHeader={true} />
+          
+          {/* Grid Wrapper */}
+          <div className="animate-fade-in-up delay-100">
+             <TopSelling limit={4} hideHeader={true} />
+          </div>
         </div>
       </section>
 
-      {/* --- CSS ANIMATIONS --- */}
+      {/* --- CSS ANIMATIONS (Refined for 'Luxury' smoothness) --- */}
       <style jsx global>{`
-        /* Smooth Fade Up Animation */
+        /* Smooth Fade Up Animation - Tuned Bezier for "Heavy" feel */
         @keyframes fadeInUp {
-          from { opacity: 0; transform: translate3d(0, 30px, 0); }
+          from { opacity: 0; transform: translate3d(0, 40px, 0); }
           to { opacity: 1; transform: translate3d(0, 0, 0); }
         }
         .animate-fade-in-up {
-          animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         /* Infinite Marquee Animation */
@@ -279,15 +324,18 @@ export default function Home() {
         }
         .animate-marquee {
           animation: marquee 40s linear infinite;
+          will-change: transform; /* Performance optimization */
         }
         .animate-marquee:hover {
           animation-play-state: paused;
         }
-        
-        /* Font Class Utilities */
+
+        /* Font Utilities */
         .font-playfair { font-family: var(--font-playfair), serif; }
         .font-parisienne { font-family: var(--font-parisienne), cursive; }
       `}</style>
+        
+        
     </main>
   );
 }
