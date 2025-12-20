@@ -156,7 +156,7 @@ export class OrderService {
     const dailyStats = new Map<string, { revenue: number; orders: number }>();
 
     orders.forEach((order) => {
-      const date = order.createdAt.toISOString().split('T')[0];
+      const date = order.createdAt.toISOString().split('T')[0] ?? '';
       const stats = dailyStats.get(date) || { revenue: 0, orders: 0 };
       stats.revenue += order.total;
       stats.orders += 1;
@@ -167,7 +167,7 @@ export class OrderService {
     for (let i = 0; i <= days; i++) {
       const d = new Date(startDate);
       d.setDate(d.getDate() + i);
-      const dateStr = d.toISOString().split('T')[0];
+      const dateStr = d.toISOString().split('T')[0] ?? '';
       const stats = dailyStats.get(dateStr) || { revenue: 0, orders: 0 };
       result.push({
         date: dateStr,

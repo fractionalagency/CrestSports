@@ -281,7 +281,7 @@ export default function ProductDetailPage() {
               {/* Main Image */}
               <div className="lg:col-span-4 relative aspect-[4/5] w-full overflow-hidden bg-neutral-50">
                 <Image
-                  src={productImages[selectedImageIndex]}
+                  src={productImages[selectedImageIndex] || '/product-main-image.png'}
                   alt={product.name}
                   fill
                   className="object-cover"
