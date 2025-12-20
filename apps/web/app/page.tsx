@@ -102,15 +102,16 @@ export default function Home() {
       <section className="px-4 py-24 md:px-12 lg:px-20 bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[700px] md:h-[850px]">
           
-          {/* Main Feature (Left) */}
+          {/* Main Feature (Left) - Men's Kit */}
           <Link href="/product?category=men" className="relative group overflow-hidden rounded-sm h-full w-full cursor-pointer block">
             <Image
-              src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=2000&auto=format&fit=crop" 
-              alt="Men's Collection"
+              src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=2000&auto=format&fit=crop"
+              alt="Men's Football Kit"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover transition-transform duration-1000 group-hover:scale-105"
+              className="object-cover object-top transition-transform duration-1000 group-hover:scale-105"
             />
+            {/* Darker overlay for text readability */}
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
             <div className="absolute bottom-10 left-10 text-white">
               <span className="text-xs font-bold tracking-widest uppercase mb-2 block opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
@@ -125,14 +126,15 @@ export default function Home() {
 
           {/* Stacked Features (Right) */}
           <div className="grid grid-rows-2 gap-6 h-full">
-            {/* Top Right */}
+            
+            {/* Top Right - Women's Kit */}
             <Link href="/product?category=women" className="relative group overflow-hidden rounded-sm cursor-pointer block">
               <Image
-                src="https://images.unsplash.com/photo-1508144753681-9986d4df99b3?q=80&w=2000&auto=format&fit=crop"
-                alt="Women's Collection"
+                src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1964&auto=format&fit=crop"
+                alt="Women's Football Kit"
                 fill
                 sizes="(max-width: 768px) 100vw, 25vw"
-                className="object-cover object-top transition-transform duration-1000 group-hover:scale-105"
+                className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
               <div className="absolute bottom-8 left-8 text-white">
@@ -143,14 +145,14 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* Bottom Right */}
+            {/* Bottom Right - Accessories (Boots/Gear) */}
             <Link href="/product?category=accessories" className="relative group overflow-hidden rounded-sm cursor-pointer block">
               <Image
-                src="https://images.unsplash.com/photo-1552066344-2464c1135c32?q=80&w=2000&auto=format&fit=crop"
-                alt="Accessories"
+                src="https://images.unsplash.com/photo-1511886929837-354d827aae26?q=80&w=2070&auto=format&fit=crop"
+                alt="Football Accessories"
                 fill
                 sizes="(max-width: 768px) 100vw, 25vw"
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors duration-500" />
               <div className="absolute bottom-8 left-8 text-white">
