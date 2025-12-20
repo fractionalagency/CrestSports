@@ -2,7 +2,7 @@
  * API Client for CrestSports backend
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const API_VERSION = 'v1';
 
 interface ApiResponse<T> {
@@ -121,7 +121,7 @@ class ApiClient {
 
       return await response.json();
     } catch (error) {
-      console.error('API Request Failed:', error);
+      console.error(`API Request Failed [${url}]:`, error);
       throw error;
     }
   }
