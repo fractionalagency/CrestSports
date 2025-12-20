@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { api, type Product } from "@/lib/api";
 import ProductCard from "@/components/ProductCard";
@@ -11,7 +11,7 @@ const playfair = Playfair_Display({
   weight: ["400", "600", "700"],
 });
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const categorySlug = searchParams.get("category");
   
@@ -107,5 +107,21 @@ export default function ProductsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white pt-24 pb-16">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+          </div>
+        </div>
+      </div>
+    }>
+      <ProductsContent />
+    </Suspense>
   );
 }

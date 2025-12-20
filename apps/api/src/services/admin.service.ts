@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { SignOptions } from 'jsonwebtoken';
 import { config } from '@config/env';
 import { UnauthorizedError } from '@utils/errors';
 
@@ -25,7 +25,7 @@ export class AdminService {
 
     const token = jwt.sign(payload, config.security.jwtSecret, {
       expiresIn: config.security.jwtExpiresIn,
-    });
+    } as SignOptions);
 
     return {
       token,
