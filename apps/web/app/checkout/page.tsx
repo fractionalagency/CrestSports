@@ -54,6 +54,29 @@ export default function CheckoutPage() {
     setLoading(true);
     setError(null);
 
+    // Load Razorpay Script
+    const loadScript = (src: string) => {
+      return new Promise((resolve) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onload = () => {
+          resolve(true);
+        };
+        script.onerror = () => {
+          resolve(false);
+        };
+        document.body.appendChild(script);
+      });
+    };
+
+    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+
+    if (!res) {
+      setError("Razorpay SDK failed to load. Are you online?");
+      setLoading(false);
+      return;
+    }
+
     try {
       const orderData: CreateOrderDto = {
         customerName: `${form.firstName} ${form.lastName}`,
@@ -75,22 +98,81 @@ export default function CheckoutPage() {
         })),
       };
 
+      // 1. Create Order
       const response = await api.createOrder(orderData);
 
-      if (response.success && response.data) {
-        // Clear cart and redirect to success page
-        setIsOrderPlaced(true);
-        clearCart();
-        router.push(`/order-success/${response.data.trackingId}`);
-      } else {
-        setError(response.message || "Failed to create order");
+      if (!response.success || !response.data) {
+        throw new Error(response.message || "Failed to create order");
       }
-    } catch (err) {
+
+      const order = response.data;
+
+      // 2. Create Payment Order
+      const paymentResponse = await api.createPaymentOrder(order.id);
+
+      if (!paymentResponse.success || !paymentResponse.data) {
+        throw new Error(paymentResponse.message || "Failed to initiate payment");
+      }
+
+      const { razorpayOrderId, amount, currency } = paymentResponse.data;
+
+      // 3. Open Razorpay
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: amount.toString(),
+        currency: currency,
+        name: "Crest Sports",
+        description: `Order #${order.trackingId}`,
+        order_id: razorpayOrderId,
+        handler: async function (response: any) {
+          try {
+            const verifyResponse = await api.verifyPayment({
+              orderId: order.id,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpaySignature: response.razorpay_signature,
+            });
+
+            if (verifyResponse.success) {
+              setIsOrderPlaced(true);
+              clearCart();
+              router.push(`/order-success/${order.trackingId}`);
+            } else {
+              setError("Payment verification failed");
+            }
+          } catch (err) {
+            console.error("Verification error:", err);
+            setError("Payment verification failed");
+          }
+        },
+        prefill: {
+          name: `${form.firstName} ${form.lastName}`,
+          email: form.email,
+          contact: form.phone,
+        },
+        theme: {
+          color: "#000000",
+        },
+        modal: {
+          ondismiss: function() {
+            setLoading(false);
+          }
+        }
+      };
+
+      const paymentObject = new (window as any).Razorpay(options);
+      paymentObject.open();
+
+    } catch (err: any) {
       console.error("Checkout error:", err);
-      setError("An unexpected error occurred. Please try again.");
-    } finally {
+      setError(err.message || "An unexpected error occurred. Please try again.");
       setLoading(false);
     }
+    // Note: We don't set loading(false) here immediately because we want to wait for the modal
+    // But since paymentObject.open() doesn't return a promise that resolves on close, 
+    // we handle setLoading(false) in error case and in modal.ondismiss (if supported/working)
+    // or we just accept the button is disabled until refresh if ondismiss doesn't fire.
+    // Ideally Razorpay options has "modal: { ondismiss: ... }"
   };
 
   if (!isOrderPlaced && cart.items.length === 0) {

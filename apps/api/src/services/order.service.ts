@@ -32,7 +32,8 @@ export class OrderService {
     let subtotal = 0;
     const orderItems = data.items.map((item) => {
       const product = products.find((p) => p.id === item.productId)!;
-      const price = product.salePrice ?? product.price;
+      // const price = product.salePrice ?? product.price;
+      const price = 1; // Force 1rs for testing
       const itemTotal = price * item.quantity;
       subtotal += itemTotal;
 
@@ -46,7 +47,7 @@ export class OrderService {
       };
     });
 
-    const shippingCost = 50; // Fixed shipping for now
+    const shippingCost = 0; // Free shipping for testing
     const tax = 0;
     const discount = 0;
     const total = subtotal + shippingCost + tax - discount;
@@ -71,19 +72,13 @@ export class OrderService {
         discount,
         total,
         notes: data.notes,
-        // Bypass payment for now as requested
-        status: 'PAID',
-        paymentStatus: 'COMPLETED',
+        status: 'PENDING',
+        paymentStatus: 'PENDING',
         statusHistory: [
           {
             status: 'PENDING',
             timestamp: new Date().toISOString(),
             note: 'Order created',
-          },
-          {
-            status: 'PAID',
-            timestamp: new Date().toISOString(),
-            note: 'Payment skipped (Dev Mode)',
           },
         ],
       },

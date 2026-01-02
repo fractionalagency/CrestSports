@@ -233,6 +233,37 @@ class ApiClient {
   async getOrderByTrackingId(trackingId: string): Promise<ApiResponse<Order>> {
     return this.request<Order>(`/orders/track/${trackingId}`);
   }
+
+  // Payment endpoints
+  async createPaymentOrder(orderId: string): Promise<ApiResponse<{
+    razorpayOrderId: string;
+    amount: number;
+    currency: string;
+    order: Order;
+  }>> {
+    return this.request<{
+      razorpayOrderId: string;
+      amount: number;
+      currency: string;
+      order: Order;
+    }>(`/payments/create/${orderId}`, {
+      method: 'POST',
+    });
+  }
+
+  async verifyPayment(data: VerifyPaymentDto): Promise<ApiResponse<Order>> {
+    return this.request<Order>('/payments/verify', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  }
+}
+
+export interface VerifyPaymentDto {
+  orderId: string;
+  razorpayOrderId: string;
+  razorpayPaymentId: string;
+  razorpaySignature: string;
 }
 
 export interface ShippingAddress {

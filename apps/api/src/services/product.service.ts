@@ -41,8 +41,15 @@ export class ProductService {
       prisma.product.count({ where }),
     ]);
 
+    // Force price to 1 for testing
+    const testProducts = products.map((p) => ({
+      ...p,
+      price: 1,
+      salePrice: null,
+    }));
+
     return {
-      products,
+      products: testProducts,
       pagination: {
         page,
         limit,
@@ -64,7 +71,12 @@ export class ProductService {
       throw new NotFoundError('Product not found');
     }
 
-    return product;
+    // Force price to 1 for testing
+    return {
+      ...product,
+      price: 1,
+      salePrice: null,
+    };
   }
 
   async findBySlug(slug: string): Promise<Product> {
@@ -79,11 +91,16 @@ export class ProductService {
       throw new NotFoundError('Product not found');
     }
 
-    return product;
+    // Force price to 1 for testing
+    return {
+      ...product,
+      price: 1,
+      salePrice: null,
+    };
   }
 
   async getFeatured(limit = 10) {
-    return prisma.product.findMany({
+    const products = await prisma.product.findMany({
       where: {
         isActive: true,
         isFeatured: true,
@@ -100,6 +117,13 @@ export class ProductService {
         },
       },
     });
+
+    // Force price to 1 for testing
+    return products.map((p) => ({
+      ...p,
+      price: 1,
+      salePrice: null,
+    }));
   }
 
   async create(data: any): Promise<Product> {
