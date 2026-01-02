@@ -36,7 +36,7 @@ export default function Home() {
       {/* --- HERO SECTION --- */}
       <section className="relative h-[92vh] w-full overflow-hidden bg-black">
         <Image
-          src="https://images.unsplash.com/photo-1551796880-d083b0fd9c64?q=80&w=2568&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=2568&auto=format&fit=crop"
           alt="Campaign Hero"
           fill
           sizes="100vw"
